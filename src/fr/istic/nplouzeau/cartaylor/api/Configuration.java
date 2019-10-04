@@ -1,6 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.api;
 
 
+import java.util.Optional;
 import java.util.Set;
 
 public interface Configuration {
@@ -13,7 +14,7 @@ public interface Configuration {
 
     void selectPart(PartType chosenPart);
 
-    PartType getSelectionForCategory(Category category);
+    Optional<PartType> getSelectionForCategory(Category category);
 
     void unselectPartType(Category categoryToClear);
 
