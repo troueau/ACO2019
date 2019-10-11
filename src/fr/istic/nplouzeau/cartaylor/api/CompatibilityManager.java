@@ -4,7 +4,7 @@ import java.util.Set;
 
 public interface CompatibilityManager extends CompatibilityChecker {
 
-    void addImcompatibilities(PartType reference, Set<PartType> target);
+    void addIncompatibilities(PartType reference, Set<PartType> target);
 
     void removeIncompatibility(PartType reference, PartType target);
 
