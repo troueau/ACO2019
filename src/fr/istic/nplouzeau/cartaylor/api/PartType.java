@@ -4,5 +4,5 @@ public interface PartType {
 
     String getName();
 
-    Category getCategoty();
+    Category getCategory();
 }
