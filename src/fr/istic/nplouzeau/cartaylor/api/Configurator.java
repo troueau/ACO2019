@@ -2,6 +2,9 @@ package fr.istic.nplouzeau.cartaylor.api;
 
 import java.util.Set;
 
+/**
+ * a public type to get information from a chosen category
+ */
 public interface Configurator {
 
     /**

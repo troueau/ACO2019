@@ -2,6 +2,9 @@ package fr.istic.nplouzeau.cartaylor.api;
 
 import java.util.Set;
 
+/**
+ * A public type to get compatibilities for chosen part types
+ */
 public interface CompatibilityChecker {
     /**
      * Allow to get the incompatible elements of the PartType
@@ -12,7 +15,7 @@ public interface CompatibilityChecker {
 
     /**
      * Allow the get the requirements for the reference
-     * @param reference
+     * @param reference reference of a part type
      * @return The requirements of the PartType
      */
     Set<PartType> getRequirements(PartType reference);
