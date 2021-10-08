@@ -3,6 +3,9 @@ package fr.istic.nplouzeau.cartaylor.api;
 
 import java.util.Set;
 
+/**
+ * A public class to get informations about the configuration
+ */
 public interface Configuration {
 
     /**
