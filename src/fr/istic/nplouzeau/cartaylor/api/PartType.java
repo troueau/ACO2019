@@ -1,6 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.api;
 
 public interface PartType {
+
     /**
      * get the name of the current part
      * @return the part name into a string
