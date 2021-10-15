@@ -1,6 +1,6 @@
 package fr.istic.nplouzeau.cartaylor.test;
 
-public class CompatibilityManagerTest {
+public class CompatibilityManagerTest extends CarTaylorTest {
     /*
      * Test pour la méthode addIncompatibilities
      * Test addIncopatibilities classique

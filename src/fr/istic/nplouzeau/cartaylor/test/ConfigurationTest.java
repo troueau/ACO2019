@@ -1,6 +1,6 @@
 package fr.istic.nplouzeau.cartaylor.test;
 
-public class ConfigurationTest {
+public class ConfigurationTest extends CarTaylorTest {
 
     /*
      * deux tests chacun pour isValid et isComplete -> un cas faux un cas vrai
