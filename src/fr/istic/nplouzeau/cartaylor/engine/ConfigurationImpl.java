@@ -1,12 +1,18 @@
 package fr.istic.nplouzeau.cartaylor.engine;
 
-import fr.istic.nplouzeau.cartaylor.api.Category;
-import fr.istic.nplouzeau.cartaylor.api.Configuration;
-import fr.istic.nplouzeau.cartaylor.api.PartType;
+import fr.istic.nplouzeau.cartaylor.api.*;
 
+import java.util.Map;
 import java.util.Set;
 
 public class ConfigurationImpl implements Configuration {
+
+    private Configurator configurator;
+    //Contains user's choice
+    private Map<Category, PartType> mapCategoryPartType;
+    private CompatibilityManager compatibilityManager;
+
+
     @Override
     public boolean isValid() {
         return false;

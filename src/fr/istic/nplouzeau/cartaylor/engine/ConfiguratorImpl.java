@@ -1,44 +1,34 @@
 package fr.istic.nplouzeau.cartaylor.engine;
 
-import fr.istic.nplouzeau.cartaylor.api.Category;
-import fr.istic.nplouzeau.cartaylor.api.Configuration;
-import fr.istic.nplouzeau.cartaylor.api.PartType;
+import fr.istic.nplouzeau.cartaylor.api.*;
 
+import java.util.Map;
 import java.util.Set;
 
-public class ConfiguratorImpl implements Configuration {
-    @Override
-    public boolean isValid() {
-        return false;
-    }
+public class ConfiguratorImpl implements Configurator {
+
+    private Set<Category> categories;
+    private CompatibilityChecker compatibilityChecker;
+    // Contains all the partType for specific Category
+    private Map<Category, Set<PartType>> mapCategoryPartType;
 
     @Override
-    public boolean isComplete() {
-        return false;
-    }
-
-    @Override
-    public Set<PartType> getSelectedParts() {
+    public Set<Category> getCategories() {
         return null;
     }
 
     @Override
-    public void selectPart(PartType chosenPart) {
-
-    }
-
-    @Override
-    public PartType getSelectionForCategory(Category category) {
+    public Set<PartType> getVariants(Category category) {
         return null;
     }
 
     @Override
-    public void unselectPartType(Category categoryToClear) {
-
+    public Configuration getConfiguration() {
+        return null;
     }
 
     @Override
-    public void clear() {
-
+    public CompatibilityChecker getCompatibilityChecker() {
+        return null;
     }
 }

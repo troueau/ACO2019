@@ -1,11 +1,18 @@
 package fr.istic.nplouzeau.cartaylor.engine;
 
 import fr.istic.nplouzeau.cartaylor.api.CompatibilityManager;
+import fr.istic.nplouzeau.cartaylor.api.Configurator;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
 
+import java.util.Map;
 import java.util.Set;
 
 public class CompatibilityManagerImpl implements CompatibilityManager {
+
+    private Configurator configurator;
+    private Map<PartType, Set<PartType>>  requirements;
+    private Map<PartType, Set<PartType>> imcompatibilities;
+
     @Override
     public Set<PartType> getIncompatibilities(PartType reference) {
         return null;
