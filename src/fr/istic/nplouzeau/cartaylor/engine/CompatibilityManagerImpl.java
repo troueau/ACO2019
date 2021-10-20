@@ -11,7 +11,13 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     private Configurator configurator;
     private Map<PartType, Set<PartType>>  requirements;
-    private Map<PartType, Set<PartType>> imcompatibilities;
+    private Map<PartType, Set<PartType>> incompatibilities;
+
+    public CompatibilityManagerImpl(Configurator configurator, Map<PartType, Set<PartType>> requirements, Map<PartType, Set<PartType>> incompatibilities) {
+        this.configurator = configurator;
+        this.requirements = requirements;
+        this.incompatibilities = incompatibilities;
+    }
 
     @Override
     public Set<PartType> getIncompatibilities(PartType reference) {

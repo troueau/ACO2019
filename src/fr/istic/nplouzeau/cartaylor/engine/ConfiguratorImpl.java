@@ -13,6 +13,13 @@ public class ConfiguratorImpl implements Configurator {
     private Map<Category, Set<PartType>> mapCategoryPartType;
     private Configuration configuration;
 
+    public ConfiguratorImpl(CompatibilityChecker compatibilityChecker, Map<Category, Set<PartType>> mapCategoryPartType, Configuration configuration) {
+        this.compatibilityChecker = compatibilityChecker;
+        this.mapCategoryPartType = mapCategoryPartType;
+        this.configuration = configuration;
+    }
+
+
     @Override
     public Set<Category> getCategories() {
         return Collections.unmodifiableSet(mapCategoryPartType.keySet());

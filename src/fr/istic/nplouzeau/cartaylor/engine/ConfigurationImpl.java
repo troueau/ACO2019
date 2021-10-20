@@ -12,6 +12,12 @@ public class ConfigurationImpl implements Configuration {
     private Map<Category, PartType> mapCategoryPartType;
     private CompatibilityManager compatibilityManager;
 
+    public ConfigurationImpl(Configurator configurator, Map<Category, PartType> mapCategoryPartType, CompatibilityManager compatibilityManager) {
+        this.configurator = configurator;
+        this.mapCategoryPartType = mapCategoryPartType;
+        this.compatibilityManager = compatibilityManager;
+    }
+
 
     @Override
     public boolean isValid() {
