@@ -27,7 +27,9 @@ public class ConfiguratorImpl implements Configurator {
 
     @Override
     public Set<PartType> getVariants(Category category) {
-        return Collections.unmodifiableSet(mapCategoryPartType.get(category));
+        Set<PartType> res = mapCategoryPartType.get(category);
+        res = res == null ? Collections.emptySet() : res;
+        return Collections.unmodifiableSet(res);
     }
 
     @Override

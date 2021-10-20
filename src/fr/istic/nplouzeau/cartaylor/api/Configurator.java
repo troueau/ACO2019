@@ -9,14 +9,14 @@ public interface Configurator {
 
     /**
      * get the categories for the current configuration
-     * @return a set of category
+     * @return an unmodifiable Set of category
      */
     Set<Category> getCategories();
 
     /**
      * get all the parts for a chosen category
      * @param category PartType's category
-     * @return a set of PartType
+     * @return a not null and unmodifiable Set of PartType
      */
     Set<PartType> getVariants(Category category);
 
