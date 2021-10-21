@@ -4,8 +4,11 @@ import fr.istic.nplouzeau.cartaylor.api.CompatibilityManager;
 import fr.istic.nplouzeau.cartaylor.api.Configurator;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CompatibilityManagerImpl implements CompatibilityManager {
 
@@ -23,31 +26,33 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     @Override
     public Set<PartType> getIncompatibilities(PartType reference) {
-        return null;
-    }
+        return Collections.unmodifiableSet(incompatibilities.get(reference));
+     }
 
     @Override
     public Set<PartType> getRequirements(PartType reference) {
-        return null;
+        return Collections.unmodifiableSet(requirements.get(reference));
     }
 
     @Override
     public void addIncompatibilities(PartType reference, Set<PartType> target) {
-
+        Set<PartType> oldPartTypeSet = incompatibilities.get(reference);
+        if(target.addAll(oldPartTypeSet)) incompatibilities.put(reference, target); //Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
     }
 
     @Override
     public void removeIncompatibility(PartType reference, PartType target) {
-
+        incompatibilities.get(reference).remove(target);
     }
 
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) {
-
+        Set<PartType> oldPartTypeSet = requirements.get(reference);
+        if(target.addAll(oldPartTypeSet)) requirements.put(reference, target); //Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
     }
 
     @Override
     public void removeRequirement(PartType reference, PartType target) {
-
+        requirements.get(reference).remove(target);
     }
 }
