@@ -23,7 +23,17 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public boolean isValid() {
-        return false;
+        if (!isComplete()) return false;
+        // Check for all PartType if requirements and incompatibilities are respected
+        for (Map.Entry<Category, PartType> entry1 : mapCategoryPartType.entrySet()) {
+            Set<PartType> incompatibilities = compatibilityManager.getIncompatibilities(entry1.getValue());
+            Set<PartType> requirements = compatibilityManager.getRequirements(entry1.getValue());
+
+            for (Map.Entry<Category, PartType> entry2 : mapCategoryPartType.entrySet()) {
+                if (incompatibilities.contains(entry2.getValue()) || !requirements.contains(entry2.getValue())) return false;
+            }
+        }
+        return true;
     }
 
     @Override
