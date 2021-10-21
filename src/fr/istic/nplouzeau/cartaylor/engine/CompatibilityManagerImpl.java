@@ -10,7 +10,9 @@ import java.util.Set;
 public class CompatibilityManagerImpl implements CompatibilityManager {
 
     private Configurator configurator;
+    //A set of parts required for the key part
     private Map<PartType, Set<PartType>>  requirements;
+    //A set of parts incompatible with the key part
     private Map<PartType, Set<PartType>> incompatibilities;
 
     public CompatibilityManagerImpl(Configurator configurator, Map<PartType, Set<PartType>> requirements, Map<PartType, Set<PartType>> incompatibilities) {
