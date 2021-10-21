@@ -2,7 +2,9 @@ package fr.istic.nplouzeau.cartaylor.engine;
 
 import fr.istic.nplouzeau.cartaylor.api.*;
 
+import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class ConfigurationImpl implements Configuration {
@@ -26,31 +28,34 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public boolean isComplete() {
-        return false;
+        return mapCategoryPartType.values().stream().anyMatch(Objects::isNull);
     }
 
     @Override
     public Set<PartType> getSelectedParts() {
-        return null;
+        return Collections.unmodifiableSet((Set<PartType>) mapCategoryPartType.values());
     }
 
     @Override
     public void selectPart(PartType chosenPart) {
-
+        Category categoryChosenPart = chosenPart.getCategory();
+        mapCategoryPartType.put(categoryChosenPart, chosenPart);
     }
 
     @Override
     public PartType getSelectionForCategory(Category category) {
-        return null;
+        return mapCategoryPartType.get(category);
     }
 
     @Override
     public void unselectPartType(Category categoryToClear) {
-
+        mapCategoryPartType.remove(categoryToClear);
     }
 
     @Override
     public void clear() {
-
+        for(Category c : mapCategoryPartType.keySet()) {
+            this.unselectPartType(c);
+        }
     }
 }
