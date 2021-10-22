@@ -1,5 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.api;
 
+import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
+
 import java.util.Set;
 
 /**
@@ -11,7 +13,7 @@ public interface CompatibilityManager extends CompatibilityChecker {
      * @param reference The reference of the PartType to modified
      * @param target Collection of the new incompatibilities
      */
-    void addIncompatibilities(PartType reference, Set<PartType> target);
+    void addIncompatibilities(PartType reference, Set<PartType> target) throws AlreadyManageException;
 
     /**
      * Allow to remove one incompatibilie of one PartType
@@ -25,7 +27,7 @@ public interface CompatibilityManager extends CompatibilityChecker {
      * @param reference reference of a part type
      * @param target The new requirements to add
      */
-    void addRequirements(PartType reference, Set<PartType> target);
+    void addRequirements(PartType reference, Set<PartType> target) throws AlreadyManageException;
 
     /**
      * Allow to remove one requirement of one PartType
