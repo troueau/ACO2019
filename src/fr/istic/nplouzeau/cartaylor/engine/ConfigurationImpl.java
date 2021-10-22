@@ -2,10 +2,7 @@ package fr.istic.nplouzeau.cartaylor.engine;
 
 import fr.istic.nplouzeau.cartaylor.api.*;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class ConfigurationImpl implements Configuration {
 
@@ -14,10 +11,15 @@ public class ConfigurationImpl implements Configuration {
     private Map<Category, PartType> mapCategoryPartType;
     private CompatibilityManager compatibilityManager;
 
-    public ConfigurationImpl(Configurator configurator, Map<Category, PartType> mapCategoryPartType, CompatibilityManager compatibilityManager) {
+    public ConfigurationImpl(Configurator configurator, CompatibilityManager compatibilityManager) {
         this.configurator = configurator;
-        this.mapCategoryPartType = mapCategoryPartType;
         this.compatibilityManager = compatibilityManager;
+
+        // Create mapCategory
+        this.mapCategoryPartType = new HashMap<>();
+        for (Category cat : configurator.getCategories()) {
+            mapCategoryPartType.put(cat, null);
+        }
     }
 
 
