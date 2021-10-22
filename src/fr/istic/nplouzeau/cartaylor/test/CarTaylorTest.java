@@ -15,9 +15,8 @@ public class CarTaylorTest {
     Map<Category, PartType> mapCategoryPartTypeConfiguration;
     Map<Category, Set<PartType>> mapCategoryPartTypeConfigurator;
 
-    Category engineCategory;
-    PartType eg100;
-
+    Category engineCategory, transmissionCategory, exteriorCategory, interiorCategory;
+    PartType eg100, eh120, tm5, ta5, tsf7, tc120, xc, xs, in, is;
 
     /**
      * Create the configuration with all the requirements incompatibilities, partType...
@@ -25,23 +24,23 @@ public class CarTaylorTest {
     @BeforeEach
     void setup() {
         engineCategory = new CategoryImpl("Engine");
-        Category transmissionCategory = new CategoryImpl("Transmission");
-        Category exteriorCategory = new CategoryImpl("Exterior");
-        Category interiorCategory = new CategoryImpl("Interior");
+        transmissionCategory = new CategoryImpl("Transmission");
+        exteriorCategory = new CategoryImpl("Exterior");
+        interiorCategory = new CategoryImpl("Interior");
 
         eg100 = new PartTypeImpl("EG100", engineCategory);
-        PartType eh120 = new PartTypeImpl("EH120", engineCategory);
+        eh120 = new PartTypeImpl("EH120", engineCategory);
 
-        PartType tm5 = new PartTypeImpl("TM5", transmissionCategory);
-        PartType ta5 = new PartTypeImpl("TA5", transmissionCategory);
-        PartType tsf7 = new PartTypeImpl("TSF7", transmissionCategory);
-        PartType tc120 = new PartTypeImpl("TC120", transmissionCategory);
+        tm5 = new PartTypeImpl("TM5", transmissionCategory);
+        ta5 = new PartTypeImpl("TA5", transmissionCategory);
+        tsf7 = new PartTypeImpl("TSF7", transmissionCategory);
+        tc120 = new PartTypeImpl("TC120", transmissionCategory);
 
-        PartType xc = new PartTypeImpl("XC", exteriorCategory);
-        PartType xs = new PartTypeImpl("XS", exteriorCategory);
+        xc = new PartTypeImpl("XC", exteriorCategory);
+        xs = new PartTypeImpl("XS", exteriorCategory);
 
-        PartType in = new PartTypeImpl("IN", interiorCategory);
-        PartType is = new PartTypeImpl("IS", interiorCategory);
+        in = new PartTypeImpl("IN", interiorCategory);
+        is = new PartTypeImpl("IS", interiorCategory);
 
         Set<PartType> enginePartTypeSet = new HashSet<>();
         enginePartTypeSet.add(eg100);
