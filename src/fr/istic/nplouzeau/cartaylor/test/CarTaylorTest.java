@@ -70,13 +70,6 @@ public class CarTaylorTest {
 
         configurator = new ConfiguratorImpl(compatibilityManager, mapCategoryPartTypeConfigurator, configuration);
 
-        mapCategoryPartTypeConfiguration = new HashMap<>();
-
-        mapCategoryPartTypeConfiguration.put(engineCategory, null);
-        mapCategoryPartTypeConfiguration.put(transmissionCategory, null);
-        mapCategoryPartTypeConfiguration.put(exteriorCategory, null);
-        mapCategoryPartTypeConfiguration.put(interiorCategory, null);
-
-        configuration = new ConfigurationImpl(configurator, mapCategoryPartTypeConfiguration, compatibilityManager);
+        configuration = new ConfigurationImpl(configurator, compatibilityManager);
     }
 }
