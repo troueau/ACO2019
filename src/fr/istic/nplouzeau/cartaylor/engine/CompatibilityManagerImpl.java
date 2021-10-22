@@ -3,6 +3,7 @@ package fr.istic.nplouzeau.cartaylor.engine;
 import fr.istic.nplouzeau.cartaylor.api.CompatibilityManager;
 import fr.istic.nplouzeau.cartaylor.api.Configurator;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
+import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
 
 import java.util.Collections;
 import java.util.Map;
@@ -35,8 +36,18 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
     }
 
     @Override
-    public void addIncompatibilities(PartType reference, Set<PartType> target) {
+    public void addIncompatibilities(PartType reference, Set<PartType> target) throws AlreadyManageException {
         Set<PartType> oldPartTypeSet = incompatibilities.get(reference);
+
+        // Check if one of the new Incompatibility is not in the Requirements list
+        Set<PartType> requirementsForReference = getRequirements(reference);
+        for (PartType elemToAdd : target) {
+            if (requirementsForReference.contains(elemToAdd)) {
+                // TODO add msg
+                throw new AlreadyManageException("");
+            }
+        }
+
         if(target.addAll(oldPartTypeSet)) incompatibilities.put(reference, target); //Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
     }
 
@@ -46,8 +57,19 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
     }
 
     @Override
-    public void addRequirements(PartType reference, Set<PartType> target) {
+    public void addRequirements(PartType reference, Set<PartType> target) throws AlreadyManageException {
         Set<PartType> oldPartTypeSet = requirements.get(reference);
+
+        // Check if one of the new Incompatibility is not in the Requirements list
+        Set<PartType> incompatibilitiesForReference = getIncompatibilities(reference);
+        for (PartType elemToAdd : target) {
+            if (incompatibilitiesForReference.contains(elemToAdd)) {
+                // TODO add msg
+                throw new AlreadyManageException("");
+            }
+        }
+
+
         if(target.addAll(oldPartTypeSet)) requirements.put(reference, target); //Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
     }
 
