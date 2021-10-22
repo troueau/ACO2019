@@ -29,8 +29,12 @@ public class ConfigurationImpl implements Configuration {
             Set<PartType> incompatibilities = compatibilityManager.getIncompatibilities(entry1.getValue());
             Set<PartType> requirements = compatibilityManager.getRequirements(entry1.getValue());
 
+            for (PartType requiredPartType : requirements) {
+                if (!this.getSelectedParts().contains(requiredPartType)) return false;
+            }
+
             for (Map.Entry<Category, PartType> entry2 : mapCategoryPartType.entrySet()) {
-                if (incompatibilities.contains(entry2.getValue()) || !requirements.contains(entry2.getValue())) return false;
+                if (incompatibilities.contains(entry2.getValue())) return false;
             }
         }
         return true;
