@@ -10,9 +10,9 @@ public class CarTaylorTest {
 
     Configurator configurator;
     Configuration configuration;
+    CompatibilityChecker compatibilityChecker;
     CompatibilityManager compatibilityManager;
 
-    Map<Category, PartType> mapCategoryPartTypeConfiguration;
     Map<Category, Set<PartType>> mapCategoryPartTypeConfigurator;
 
     Category engineCategory, transmissionCategory, exteriorCategory, interiorCategory;
@@ -42,23 +42,13 @@ public class CarTaylorTest {
         in = new PartTypeImpl("IN", interiorCategory);
         is = new PartTypeImpl("IS", interiorCategory);
 
-        Set<PartType> enginePartTypeSet = new HashSet<>();
-        enginePartTypeSet.add(eg100);
-        enginePartTypeSet.add(eh120);
+        Set<PartType> enginePartTypeSet = Set.of(eg100, eh120);
 
-        Set<PartType> transmissionPartTypeSet = new HashSet<>();
-        transmissionPartTypeSet.add(tm5);
-        transmissionPartTypeSet.add(ta5);
-        transmissionPartTypeSet.add(tsf7);
-        transmissionPartTypeSet.add(tc120);
+        Set<PartType> transmissionPartTypeSet = Set.of(tm5, ta5, tsf7, tc120);
 
-        Set<PartType> exteriorPartTypeSet = new HashSet<>();
-        exteriorPartTypeSet.add(xc);
-        exteriorPartTypeSet.add(xs);
+        Set<PartType> exteriorPartTypeSet = Set.of(xc, xs);
 
-        Set<PartType> interiorPartTypeSet = new HashSet<>();
-        interiorPartTypeSet.add(in);
-        interiorPartTypeSet.add(is);
+        Set<PartType> interiorPartTypeSet = Set.of(in, is);
 
         mapCategoryPartTypeConfigurator = new HashMap<>();
 
@@ -67,8 +57,9 @@ public class CarTaylorTest {
         mapCategoryPartTypeConfigurator.put(exteriorCategory, exteriorPartTypeSet);
         mapCategoryPartTypeConfigurator.put(interiorCategory, interiorPartTypeSet);
 
-        configurator = new ConfiguratorImpl(compatibilityManager, mapCategoryPartTypeConfigurator, configuration);
+        configurator = new ConfiguratorImpl(compatibilityChecker, mapCategoryPartTypeConfigurator, configuration);
 
         configuration = new ConfigurationImpl(configurator, compatibilityManager);
+
     }
 }
