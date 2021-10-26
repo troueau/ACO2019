@@ -18,26 +18,38 @@ public class ConfiguratorTest extends CarTaylorTest {
         assertEquals(mapCategoryPartTypeConfigurator.keySet(), configurator.getCategories());
     }
 
+    /*
+     * test du Getter des variants où la categorie existe dans la map
+     */
     @Test
     void testGetVariantsExistingCategory() {
         assertEquals(mapCategoryPartTypeConfigurator.get(engineCategory), configurator.getVariants(engineCategory));
     }
 
+    /*
+     * test du Getter des variants où la categorie n'existe pas dans la map -> le getter retourne donc un emptySet
+     */
     @Test
     void testGetVariantsCategoryDoesNotExist() {
         Category mockCategory = new CategoryImpl("MockCategory");
         assertEquals(Collections.emptySet(), configurator.getVariants(mockCategory));
     }
 
+    /*
+     * test du getter renvoyant la configuration contenue dans la class configurator
+     */
     @Test
     void testGetConfiguration() {
-        // TODO test à completer (ne passe pas)
+        // TODO : le test ne passe pas car dans la création du configurator dans CarTaylorTest, la configuration est null car par encore créée
         //assertEquals(configuration, configurator.getConfiguration());
     }
 
+    /*
+     * test du getter renvoyant le compatibilityManager contenu dans la class configurator
+     */
     @Test
-    void testGetCompatibilityChecker() {
-
+    void testGetCompatibilityManager() {
+        assertEquals(compatibilityChecker, configurator.getCompatibilityChecker());
     }
 
 }
