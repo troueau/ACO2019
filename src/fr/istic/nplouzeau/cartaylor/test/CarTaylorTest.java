@@ -61,5 +61,6 @@ public class CarTaylorTest {
 
         configuration = new ConfigurationImpl(configurator, compatibilityManager);
 
+        configuration.selectPart(tm5);
     }
 }
