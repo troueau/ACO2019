@@ -54,9 +54,9 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
             }
         }
 
-        Set<PartType> actualPartTypeSet = incompatibilities.get(reference);
+        Set<PartType> actualPartTypeSet = Objects.requireNonNullElse(incompatibilities.get(reference), new HashSet<>());
         actualPartTypeSet.addAll(target);
-//        if(target.addAll(oldPartTypeSet)) incompatibilities.put(reference, target); //Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
+        incompatibilities.put(reference, actualPartTypeSet);
     }
 
     @Override
@@ -66,10 +66,6 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) throws AlreadyManageException {
-
-        // TODO what happen if this instruction return null (reference isn't in the requirements list)
-        Set<PartType> oldPartTypeSet = requirements.get(reference);
-
         // Check if one of the new Requirements is not in the Incompatibilites list
         Set<PartType> incompatibilitiesForReference = getIncompatibilities(reference);
         for (PartType elemToAdd : target) {
@@ -78,8 +74,9 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
             }
         }
 
-
-        if(target.addAll(oldPartTypeSet)) requirements.put(reference, target); // TODO Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
+        Set<PartType> actualPartTypeSet = Objects.requireNonNullElse(requirements.get(reference), new HashSet<>());
+        actualPartTypeSet.addAll(target);
+        requirements.put(reference, actualPartTypeSet);
     }
 
     @Override

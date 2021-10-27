@@ -18,6 +18,8 @@ public class CarTaylorTest {
     Category engineCategory, transmissionCategory, exteriorCategory, interiorCategory;
     PartType eg100, eh120, tm5, ta5, tsf7, tc120, xc, xs, in, is;
 
+    Set<PartType> requirementsTC120, incompatibilitiesTSF7;
+
     /**
      * Create the configuration with all the requirements incompatibilities, partType...
      */
@@ -62,5 +64,19 @@ public class CarTaylorTest {
         configuration = new ConfigurationImpl(configurator, compatibilityManager);
 
         configuration.selectPart(tm5);
+
+
+
+        Map<PartType, Set<PartType>> requirements = new HashMap<>();
+        requirementsTC120 = new HashSet<>();
+        requirementsTC120.add(eh120);
+        requirements.put(tc120, requirementsTC120);
+
+        Map<PartType, Set<PartType>> incompatibilities = new HashMap<>();
+        incompatibilitiesTSF7 = new HashSet<>();
+        incompatibilitiesTSF7.add(eg100);
+        incompatibilities.put(tsf7, incompatibilitiesTSF7);
+
+        compatibilityManager = new CompatibilityManagerImpl(configurator, requirements, incompatibilities);
     }
 }

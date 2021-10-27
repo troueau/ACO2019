@@ -14,22 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CompatibilityCheckerTest extends CarTaylorTest {
 
-
-
-
-    @BeforeEach
-    void init() {
-        Map<PartType, Set<PartType>> requirements = new HashMap<>();
-        requirementsTC120 = Set.of(eh120);
-        requirements.put(tc120, requirementsTC120);
-
-        Map<PartType, Set<PartType>> incompatibilities = new HashMap<>();
-        incompatibilitiesTSF7 = Set.of(eg100);
-        incompatibilities.put(tsf7, incompatibilitiesTSF7);
-
-        compatibilityManager = new CompatibilityManagerImpl(configurator, requirements, incompatibilities);
-    }
-
     @Test
     void testGetIncompatibilitiesWithNotExistReference() {
         assertEquals(0, compatibilityManager.getIncompatibilities(null).size());
