@@ -28,13 +28,9 @@ public class ConfigurationImpl implements Configuration {
         if (!isComplete()) return false;
         // Check for all PartType if requirements and incompatibilities are respected
         for (Map.Entry<Category, PartType> entry1 : mapCategoryPartType.entrySet()) {
-            Set<PartType> incompatibilities = new HashSet<>();
-            Set<PartType> requirements = new HashSet<>();
 
-            if(compatibilityManager!=null) {
-                incompatibilities = compatibilityManager.getIncompatibilities(entry1.getValue());
-                requirements = compatibilityManager.getRequirements(entry1.getValue());
-            }
+            Set<PartType> incompatibilities = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getIncompatibilities(entry1.getValue());
+            Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements(entry1.getValue());
 
             for (PartType requiredPartType : requirements) {
                 if (!this.getSelectedParts().contains(requiredPartType)) return false;
