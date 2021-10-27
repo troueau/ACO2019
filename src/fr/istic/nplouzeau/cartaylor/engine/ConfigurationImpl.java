@@ -70,7 +70,7 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public void unselectPartType(Category categoryToClear) {
-        mapCategoryPartType.remove(categoryToClear);
+        mapCategoryPartType.put(categoryToClear, null);
     }
 
     @Override
