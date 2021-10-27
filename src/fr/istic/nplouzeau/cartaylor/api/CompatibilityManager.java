@@ -11,7 +11,8 @@ public interface CompatibilityManager extends CompatibilityChecker {
     /**
      * Allow to add new incompatibilities for a PartType
      * @param reference The reference of the PartType to modified
-     * @param target Collection of the new incompatibilities
+     * @param target Collection of the new incompatibilities. The elements can't be in the requirements.
+     * @throws AlreadyManageException If one of the element to add is already in the requirements
      */
     void addIncompatibilities(PartType reference, Set<PartType> target) throws AlreadyManageException;
 
@@ -25,7 +26,8 @@ public interface CompatibilityManager extends CompatibilityChecker {
     /**
      * Allow to add new requirements of one PartType
      * @param reference reference of a part type
-     * @param target The new requirements to add
+     * @param target The new requirements to add. The elements can't be in the incompatibilities.
+     * @throws AlreadyManageException If one of the element to add is already in the incompatibilities
      */
     void addRequirements(PartType reference, Set<PartType> target) throws AlreadyManageException;
 

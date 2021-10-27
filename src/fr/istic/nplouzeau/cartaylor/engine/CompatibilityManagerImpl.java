@@ -5,13 +5,14 @@ import fr.istic.nplouzeau.cartaylor.api.Configurator;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
 import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CompatibilityManagerImpl implements CompatibilityManager {
+
+    private static final String ERR_ALREADY_IN_REQUIREMENTS = "You can't add %s in incompatibilities because it is already in requirements";
+    private static final String ERR_ALREADY_IN_INCOMPATIBILITIES = "You can't add %s in requirements because it is already in incompatibilities";
 
     private Configurator configurator;
     //A set of parts required for the key part
@@ -19,10 +20,16 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
     //A set of parts incompatible with the key part
     private Map<PartType, Set<PartType>> incompatibilities;
 
+    /**
+     * Construct CompatibilityManagerImpl
+     * @param configurator the reference to the configurator must be not null
+     * @param requirements The map of requirements can be empty or null
+     * @param incompatibilities The map of the incompatibilities can be empty or null
+     */
     public CompatibilityManagerImpl(Configurator configurator, Map<PartType, Set<PartType>> requirements, Map<PartType, Set<PartType>> incompatibilities) {
-        this.configurator = configurator;
-        this.requirements = requirements;
-        this.incompatibilities = incompatibilities;
+        this.configurator = Objects.requireNonNull(configurator);
+        this.requirements = Objects.requireNonNullElse(requirements, new HashMap<>());
+        this.incompatibilities = Objects.requireNonNullElse(incompatibilities, new HashMap<>());
     }
 
     @Override
@@ -43,8 +50,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
         Set<PartType> requirementsForReference = getRequirements(reference);
         for (PartType elemToAdd : target) {
             if (requirementsForReference.contains(elemToAdd)) {
-                // TODO add msg
-                throw new AlreadyManageException("");
+                throw new AlreadyManageException(String.format(ERR_ALREADY_IN_REQUIREMENTS, elemToAdd.toString()));
             }
         }
 
@@ -58,19 +64,20 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) throws AlreadyManageException {
+
+        // TODO what happen if this instruction return null (reference isn't in the requirements list)
         Set<PartType> oldPartTypeSet = requirements.get(reference);
 
-        // Check if one of the new Incompatibility is not in the Requirements list
+        // Check if one of the new Requirements is not in the Incompatibilites list
         Set<PartType> incompatibilitiesForReference = getIncompatibilities(reference);
         for (PartType elemToAdd : target) {
             if (incompatibilitiesForReference.contains(elemToAdd)) {
-                // TODO add msg
-                throw new AlreadyManageException("");
+                throw new AlreadyManageException(String.format(ERR_ALREADY_IN_INCOMPATIBILITIES, elemToAdd.toString()));
             }
         }
 
 
-        if(target.addAll(oldPartTypeSet)) requirements.put(reference, target); //Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
+        if(target.addAll(oldPartTypeSet)) requirements.put(reference, target); // TODO Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
     }
 
     @Override
