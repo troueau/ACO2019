@@ -44,18 +44,18 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public boolean isComplete() {
-        return mapCategoryPartType.values().stream().anyMatch(Objects::isNull);
+        return mapCategoryPartType.values().stream().noneMatch(Objects::isNull);
     }
 
     @Override
     public Set<PartType> getSelectedParts() {
-        return Collections.unmodifiableSet((Set<PartType>) mapCategoryPartType.values());
+        Set<PartType> setOfSelectedParts = new HashSet<>(mapCategoryPartType.values());
+        return Collections.unmodifiableSet(setOfSelectedParts);
     }
 
     @Override
     public void selectPart(PartType chosenPart) {
-        Category categoryChosenPart = chosenPart.getCategory();
-        mapCategoryPartType.put(categoryChosenPart, chosenPart);
+        mapCategoryPartType.put(chosenPart.getCategory(), chosenPart);
     }
 
     @Override
