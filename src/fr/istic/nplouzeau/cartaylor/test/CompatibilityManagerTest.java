@@ -34,7 +34,6 @@ public class CompatibilityManagerTest extends CarTaylorTest {
 
     @Test
     void testAddIncompatibilitiesWhenNoPreviousIncompatibilities() {
-        Map<PartType, Set<PartType>> incompatibilities = new HashMap<>();
         Set<PartType> incompatibilitiesEG100 = Set.of(tm5, ta5);
 
         try {
@@ -64,11 +63,96 @@ public class CompatibilityManagerTest extends CarTaylorTest {
 
     }
     @Test
-    void testAddIncompatibilitesException() {
+    void testAddIncompatibilitiesException() {
         assertThrows(AlreadyManageException.class, () -> compatibilityManager.addIncompatibilities(tc120, requirementsTC120));
     }
 
 
+    @Test
+    void testAddRequirementsWhenNoPreviousRequirements() {
+        Set<PartType> requirementsEG100 = Set.of(tm5, ta5);
+
+        try {
+            compatibilityManager.addRequirements(eg100, requirementsEG100);
+        } catch (AlreadyManageException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(requirementsEG100, compatibilityManager.getRequirements(eg100));
+
+    }
+    @Test
+    void testAddRequirementsWhenThereIsPreviousRequirements() {
+        Set<PartType> requirements2Tc120 = Set.of(xc, in);
+        Set<PartType> expected = new HashSet<>();
+        expected.add(xc);
+        expected.add(in);
+        expected.addAll(requirementsTC120);
+
+        try {
+            compatibilityManager.addRequirements(tc120, requirements2Tc120);
+        } catch (AlreadyManageException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(expected, compatibilityManager.getRequirements(tc120));
+
+    }
+    @Test
+    void testAddRequirementsException() {
+        assertThrows(AlreadyManageException.class, () -> compatibilityManager.addRequirements(tsf7, incompatibilitiesTSF7));
+    }
+
+    @Test
+    void testRemoveIncompatibilityWhenRefNotExist() {
+        assertDoesNotThrow(() -> compatibilityManager.removeIncompatibility(null, eg100));
+    }
+    @Test
+    void testRemoveIncompatibilityWhenTargetNotExist() {
+        assertDoesNotThrow(() -> compatibilityManager.removeIncompatibility(tsf7, null));
+    }
+
+    @Test
+    void testRemoveIncompatibilityWhenTargetIsNotInIncompatibilities() {
+        assertDoesNotThrow(() -> compatibilityManager.removeIncompatibility(tsf7, is));
+        assertEquals(Set.of(eg100), compatibilityManager.getIncompatibilities(tsf7));
+    }
+    @Test
+    void testRemoveIncompatibilityWhenMappingValueIsNull() {
+        assertDoesNotThrow(() -> compatibilityManager.removeIncompatibility(xs, is));
+        assertEquals(Collections.emptySet(), compatibilityManager.getIncompatibilities(xs));
+    }
+    @Test
+    void testRemoveIncompatibility() {
+        assertDoesNotThrow(() -> compatibilityManager.removeIncompatibility(tsf7, eg100));
+        assertEquals(Collections.emptySet(), compatibilityManager.getIncompatibilities(tsf7));
+    }
+
+    @Test
+    void testRemoveRequirementWhenRefNotExist() {
+        assertDoesNotThrow(() -> compatibilityManager.removeRequirement(null, eg100));
+    }
+    @Test
+    void testRequirementsWhenTargetNotExist() {
+        assertDoesNotThrow(() -> compatibilityManager.removeRequirement(eh120, null));
+    }
+
+    @Test
+    void testRemoveRequirementWhenTargetIsNotInRequirements() {
+        assertDoesNotThrow(() -> compatibilityManager.removeRequirement(tc120, is));
+        assertEquals(Set.of(eh120), compatibilityManager.getRequirements(tc120));
+    }
+    @Test
+    void testRemoveRequirementyWhenMappingValueIsNull() {
+        assertDoesNotThrow(() -> compatibilityManager.removeRequirement(xs, is));
+        assertEquals(Collections.emptySet(), compatibilityManager.getRequirements(xs));
+    }
+
+    @Test
+    void testRemoveRequirement() {
+        assertDoesNotThrow(() -> compatibilityManager.removeRequirement(tc120, eh120));
+        assertEquals(Collections.emptySet(), compatibilityManager.getRequirements(tc120));
+    }
 //
 //    @Test
 //    void testAddIncompatibiliitesException() {
@@ -80,7 +164,7 @@ public class CompatibilityManagerTest extends CarTaylorTest {
 
 
     /*
-     * Test pour la méthode addIncompatibilities
+     * Test pour la méthode addRequirements
      * Test addIncopatibilities classique
      * Test avec avec un élément qui est déjà dans la liste des incompatibilitées
      * Test avec avec un élément qui est dans la liste des requirements

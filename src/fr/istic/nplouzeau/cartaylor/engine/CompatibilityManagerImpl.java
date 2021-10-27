@@ -61,7 +61,10 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     @Override
     public void removeIncompatibility(PartType reference, PartType target) {
-        incompatibilities.get(reference).remove(target);
+        if (reference != null) {
+            Set<PartType> tmp = Objects.requireNonNullElse(incompatibilities.get(reference), new HashSet<>());
+            tmp.remove(target);
+        }
     }
 
     @Override
@@ -81,6 +84,9 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     @Override
     public void removeRequirement(PartType reference, PartType target) {
-        requirements.get(reference).remove(target);
+        if (reference != null) {
+            Set<PartType> tmp = Objects.requireNonNullElse(requirements.get(reference), new HashSet<>());
+            tmp.remove(target);
+        }
     }
 }
