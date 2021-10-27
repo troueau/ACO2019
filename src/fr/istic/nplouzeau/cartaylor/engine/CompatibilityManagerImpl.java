@@ -34,18 +34,18 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     @Override
     public Set<PartType> getIncompatibilities(PartType reference) {
-        return Collections.unmodifiableSet(incompatibilities.get(reference));
+        Set<PartType> ret = Objects.requireNonNullElse(incompatibilities.get(reference), Collections.emptySet());
+        return Collections.unmodifiableSet(ret);
      }
 
     @Override
     public Set<PartType> getRequirements(PartType reference) {
-        return Collections.unmodifiableSet(requirements.get(reference));
+        Set<PartType> ret = Objects.requireNonNullElse(requirements.get(reference), Collections.emptySet());
+        return Collections.unmodifiableSet(ret);
     }
 
     @Override
     public void addIncompatibilities(PartType reference, Set<PartType> target) throws AlreadyManageException {
-        Set<PartType> oldPartTypeSet = incompatibilities.get(reference);
-
         // Check if one of the new Incompatibility is not in the Requirements list
         Set<PartType> requirementsForReference = getRequirements(reference);
         for (PartType elemToAdd : target) {
@@ -54,7 +54,9 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
             }
         }
 
-        if(target.addAll(oldPartTypeSet)) incompatibilities.put(reference, target); //Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
+        Set<PartType> actualPartTypeSet = incompatibilities.get(reference);
+        actualPartTypeSet.addAll(target);
+//        if(target.addAll(oldPartTypeSet)) incompatibilities.put(reference, target); //Pas sur, il y a d'autre moyens de le faire, vérifier si null ou vide ...
     }
 
     @Override
