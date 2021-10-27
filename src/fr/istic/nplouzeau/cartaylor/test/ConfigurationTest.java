@@ -1,24 +1,137 @@
 package fr.istic.nplouzeau.cartaylor.test;
 
+import fr.istic.nplouzeau.cartaylor.api.PartType;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class ConfigurationTest extends CarTaylorTest {
 
     /*
-     * deux tests chacun pour isValid et isComplete -> un cas faux un cas vrai
+     * test de la methode isValid si la configuration n'est pas complete
+     */
+    @Test
+    void testIsValidWhenConfigurationIsNotComplete() {
+        assertFalse(configuration.isValid());
+    }
+
+    /*
+     * test de la methode isValid quand aucune incompatibilités ni obligations ne sont présentes pour les partType
+     */
+    @Test
+    void testIsValidWhenNoIncompatibilitiesAndNoRequirements() {
+        //On complete la configuration avec des PartType au hasard
+        configuration.selectPart(eg100);
+        configuration.selectPart(in);
+        configuration.selectPart(xc);
+
+        //On verifie que la configuration est bien complete
+        assertTrue(configuration.isComplete());
+
+        //On peut maintenant tester si la configuration est bien valide
+        assertTrue(configuration.isValid());
+    }
+
+    /*
+     * test de la methode isValid ... // TODO faire les autres tests pour la methode isValid
      */
 
     /*
-     * pour les getters 1 seul test
+     * test du getter getSelectedParts
      */
+    @Test
+    void testGetSelectedParts() {
+        Set<PartType> expectedSetOfSelectedPartType = new HashSet<>();
+        expectedSetOfSelectedPartType.add(null); //Dans la configuration si il y a un ou + PartType qui ne sont pas selectionnés, alors il y a une valeur null dans le set
+        expectedSetOfSelectedPartType.add(tm5);
+        assertEquals(expectedSetOfSelectedPartType, configuration.getSelectedParts());
+    }
 
     /*
-     * selectPart -> 2 tests, changer la selection courrante, selectionner une part qui est déjà selectionnée
+     * test du getter getSelectionForCategory when a part is chosen
      */
+    @Test
+    void testGetSelectionForCategoryWhenPartChosen() {
+        assertEquals(tm5, configuration.getSelectionForCategory(transmissionCategory));
+    }
 
     /*
-     * unselectPartType -> deselectionner tout les partType d'une categorie, deselectionner une partType pas selectionnée
+     * test du getter getSelectionForCategory when a part is chosen
      */
+    @Test
+    void testGetSelectionForCategoryWhenNoPartHasBeenChosen() {
+        assertNull(configuration.getSelectionForCategory(engineCategory));
+    }
 
     /*
-     * clear -> 1 test clear toute une config
+     * test de la methode verifiant si une configuration est complete
      */
+    @Test
+    void testIsComplete() {
+        assertFalse(configuration.isComplete());
+    }
+
+    /*
+     * test de la methode selectPart
+     */
+    @Test
+    void testSelectPartOnCurrentConfiguration() {
+        assertNull(configuration.getSelectionForCategory(engineCategory));
+        configuration.selectPart(eg100);
+        assertEquals(eg100, configuration.getSelectionForCategory(engineCategory));
+    }
+
+    /*
+     * test de la methode selectPart quand la partType que l'on selectionne est deja dans la configuration
+     * PAS TROP D'INTERET !
+     */
+    @Test
+    void testSelectPartWhenAlreadySelected() {
+        assertEquals(tm5, configuration.getSelectionForCategory(transmissionCategory));
+        configuration.selectPart(tm5);
+        assertEquals(tm5, configuration.getSelectionForCategory(transmissionCategory));
+    }
+
+    /*
+     * test de la methode unselectPartType -> deselectionner la partType d'une categorie
+     */
+    @Test
+    void testUnselectPart() {
+        assertEquals(tm5, configuration.getSelectionForCategory(transmissionCategory));
+        configuration.unselectPartType(transmissionCategory);
+        assertNull(configuration.getSelectionForCategory(transmissionCategory));
+    }
+
+    /*
+     * test de la methode unselectPartType quand aucun partType n'est associé à la categorie choisie
+     * TEST SANS INTERET ?
+     */
+    @Test
+    void testUnselectPartWhenAlreadyNull() {
+        assertNull(configuration.getSelectionForCategory(interiorCategory));
+        configuration.unselectPartType(interiorCategory);
+        assertNull(configuration.getSelectionForCategory(interiorCategory));
+    }
+
+    // TODO la methode clear ne fonctionne pas : throws ConcurrentModificationException
+    /*
+     * test de la methode clear -> 1 test clear toute une config
+     *
+    @Test
+    void testClear() {
+        //On verifie déjà que la configuration n'est pas vide avant de clear
+        Set<PartType> expectedSetOfSelectedPartType = new HashSet<>();
+        expectedSetOfSelectedPartType.add(null);
+        expectedSetOfSelectedPartType.add(tm5);
+        assertEquals(expectedSetOfSelectedPartType, configuration.getSelectedParts());
+
+        //On clear la config et on verifie qu'elle est bien null
+        configuration.clear();
+        expectedSetOfSelectedPartType.remove(tm5);
+        assertEquals(expectedSetOfSelectedPartType, configuration.getSelectedParts());
+    }
+    */
 }
