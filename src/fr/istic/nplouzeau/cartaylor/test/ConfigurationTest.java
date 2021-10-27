@@ -116,10 +116,9 @@ public class ConfigurationTest extends CarTaylorTest {
         assertNull(configuration.getSelectionForCategory(interiorCategory));
     }
 
-    // TODO la methode clear ne fonctionne pas : throws ConcurrentModificationException
     /*
      * test de la methode clear -> 1 test clear toute une config
-     *
+     */
     @Test
     void testClear() {
         //On verifie déjà que la configuration n'est pas vide avant de clear
@@ -133,5 +132,4 @@ public class ConfigurationTest extends CarTaylorTest {
         expectedSetOfSelectedPartType.remove(tm5);
         assertEquals(expectedSetOfSelectedPartType, configuration.getSelectedParts());
     }
-    */
 }
