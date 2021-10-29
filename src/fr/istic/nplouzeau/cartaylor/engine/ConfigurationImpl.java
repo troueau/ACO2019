@@ -6,20 +6,13 @@ import java.util.*;
 
 public class ConfigurationImpl implements Configuration {
 
-    private Configurator configurator;
     //Contains user's choice
     private Map<Category, PartType> mapCategoryPartType;
     private CompatibilityManager compatibilityManager;
 
-    public ConfigurationImpl(Configurator configurator, CompatibilityManager compatibilityManager) {
-        this.configurator = configurator;
+    public ConfigurationImpl(Map<Category, PartType> mapCategoryPartType, CompatibilityManager compatibilityManager) {
+        this.mapCategoryPartType = mapCategoryPartType;
         this.compatibilityManager = compatibilityManager;
-
-        // Create mapCategory
-        this.mapCategoryPartType = new HashMap<>();
-        for (Category cat : configurator.getCategories()) {
-            mapCategoryPartType.put(cat, null);
-        }
     }
 
 
