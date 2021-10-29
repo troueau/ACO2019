@@ -1,10 +1,17 @@
 package fr.istic.nplouzeau.cartaylor.test;
 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CategoryTest extends CarTaylorTest {
 
     /*
-     * 1 test pour getter
+     * test du getter getName de la class CategoryImpl
      */
+    @Test
+    void testGetNameCategory() {
+        assertEquals("Exterior", exteriorCategory.getName());
+    }
 
 }
