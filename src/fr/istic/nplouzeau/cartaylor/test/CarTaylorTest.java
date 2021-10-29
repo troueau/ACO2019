@@ -17,7 +17,7 @@ public class CarTaylorTest {
     Map<Category, PartType> mapCategoryPartTypeConfiguration;
 
     Category engineCategory, transmissionCategory, exteriorCategory, interiorCategory;
-    PartType eg100, eh120, tm5, ta5, tsf7, tc120, xc, xs, in, is;
+    PartType eg100, eh120, tm5, ta5, tsf7, tc120, xc, xs, in, is, xm, ih;
 
     Set<PartType> requirementsTC120, incompatibilitiesTSF7;
 
@@ -41,17 +41,21 @@ public class CarTaylorTest {
 
         xc = new PartTypeImpl("XC", exteriorCategory);
         xs = new PartTypeImpl("XS", exteriorCategory);
+        xm = new PartTypeImpl("XM", exteriorCategory);
 
         in = new PartTypeImpl("IN", interiorCategory);
         is = new PartTypeImpl("IS", interiorCategory);
+        ih = new PartTypeImpl("IH", interiorCategory);
+
+
 
         Set<PartType> enginePartTypeSet = Set.of(eg100, eh120);
 
         Set<PartType> transmissionPartTypeSet = Set.of(tm5, ta5, tsf7, tc120);
 
-        Set<PartType> exteriorPartTypeSet = Set.of(xc, xs);
+        Set<PartType> exteriorPartTypeSet = Set.of(xc, xs, xm);
 
-        Set<PartType> interiorPartTypeSet = Set.of(in, is);
+        Set<PartType> interiorPartTypeSet = Set.of(in, is, ih);
 
         mapCategoryPartTypeConfigurator = new HashMap<>();
 
