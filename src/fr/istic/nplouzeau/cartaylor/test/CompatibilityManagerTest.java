@@ -24,11 +24,12 @@ public class CompatibilityManagerTest extends CarTaylorTest {
 
     @Test
     void testConstructor() {
-        assertDoesNotThrow(() -> new CompatibilityManagerImpl(configurator, null, null));
+        assertDoesNotThrow(() -> new CompatibilityManagerImpl(null, null));
     }
+
     @Test
     void testConstructorWithException() {
-        assertThrows(NullPointerException.class,() -> new CompatibilityManagerImpl(null, emptyHashMap, emptyHashMap));
+        assertThrows(NullPointerException.class,() -> new CompatibilityManagerImpl(emptyHashMap, emptyHashMap));
     }
 
     @Test
