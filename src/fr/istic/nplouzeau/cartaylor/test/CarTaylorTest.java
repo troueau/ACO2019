@@ -14,6 +14,7 @@ public class CarTaylorTest {
     CompatibilityManager compatibilityManager;
 
     Map<Category, Set<PartType>> mapCategoryPartTypeConfigurator;
+    Map<Category, PartType> mapCategoryPartTypeConfiguration;
 
     Category engineCategory, transmissionCategory, exteriorCategory, interiorCategory;
     PartType eg100, eh120, tm5, ta5, tsf7, tc120, xc, xs, in, is;
@@ -72,7 +73,14 @@ public class CarTaylorTest {
 
         compatibilityManager = new CompatibilityManagerImpl(requirements, incompatibilities);
 
-        configuration = new ConfigurationImpl(compatibilityManager);
+        mapCategoryPartTypeConfiguration = new HashMap<>();
+
+        mapCategoryPartTypeConfiguration.put(engineCategory, null);
+        mapCategoryPartTypeConfiguration.put(transmissionCategory, null);
+        mapCategoryPartTypeConfiguration.put(exteriorCategory, null);
+        mapCategoryPartTypeConfiguration.put(interiorCategory, null);
+
+        configuration = new ConfigurationImpl(mapCategoryPartTypeConfiguration, compatibilityManager);
         configuration.selectPart(tm5);
 
         configurator = new ConfiguratorImpl(compatibilityChecker, mapCategoryPartTypeConfigurator, configuration);
