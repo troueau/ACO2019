@@ -1,14 +1,6 @@
 package fr.istic.nplouzeau.cartaylor.test;
 
-import fr.istic.nplouzeau.cartaylor.api.PartType;
-import fr.istic.nplouzeau.cartaylor.engine.CompatibilityManagerImpl;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
