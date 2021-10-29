@@ -1,13 +1,10 @@
 package fr.istic.nplouzeau.cartaylor.engine;
 
 import fr.istic.nplouzeau.cartaylor.api.CompatibilityManager;
-import fr.istic.nplouzeau.cartaylor.api.Configurator;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
 import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CompatibilityManagerImpl implements CompatibilityManager {
 
@@ -19,6 +16,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
     //A set of parts incompatible with the key part
     private Map<PartType, Set<PartType>> incompatibilities;
 
+    private boolean lockRequirements;
     /**
      * Construct CompatibilityManagerImpl
      * @param requirements The map of requirements can be empty or null
@@ -27,6 +25,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
     public CompatibilityManagerImpl(Map<PartType, Set<PartType>> requirements, Map<PartType, Set<PartType>> incompatibilities) {
         this.requirements = Objects.requireNonNullElse(requirements, new HashMap<>());
         this.incompatibilities = Objects.requireNonNullElse(incompatibilities, new HashMap<>());
+        this.lockRequirements = false;
     }
 
     @Override
@@ -66,6 +65,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) throws AlreadyManageException {
+        lockRequirements = true;
         // Check if one of the new Requirements is not in the Incompatibilites list
         Set<PartType> incompatibilitiesForReference = getIncompatibilities(reference);
         for (PartType elemToAdd : target) {
@@ -76,6 +76,16 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
         Set<PartType> actualPartTypeSet = Objects.requireNonNullElse(requirements.get(reference), new HashSet<>());
         actualPartTypeSet.addAll(target);
+
+        //Ajout symétrique de la PartType
+        if(!lockRequirements) {
+            lockRequirements = true;
+            for(PartType partToAdd : target) {
+                addRequirements(partToAdd, Set.of(reference));
+            }
+            lockRequirements = false;
+        }
+
         requirements.put(reference, actualPartTypeSet);
     }
 

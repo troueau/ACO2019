@@ -38,8 +38,8 @@ public class CompatibilityManagerTest extends CarTaylorTest {
         }
 
         assertEquals(incompatibilitiesEG100, compatibilityManager.getIncompatibilities(eg100));
-
     }
+
     @Test
     void testAddIncompatibilitiesWhenThereIsPreviousIncompatibilities() {
         Set<PartType> incompatibilities2Tsf7 = Set.of(xc, in);
@@ -61,7 +61,6 @@ public class CompatibilityManagerTest extends CarTaylorTest {
     void testAddIncompatibilitiesException() {
         assertThrows(AlreadyManageException.class, () -> compatibilityManager.addIncompatibilities(tc120, requirementsTC120));
     }
-
 
     @Test
     void testAddRequirementsWhenNoPreviousRequirements() {
@@ -96,6 +95,23 @@ public class CompatibilityManagerTest extends CarTaylorTest {
     @Test
     void testAddRequirementsException() {
         assertThrows(AlreadyManageException.class, () -> compatibilityManager.addRequirements(tsf7, incompatibilitiesTSF7));
+    }
+
+    @Test
+    void testAddRequirementsSymetric() {
+        Set<PartType> partTypeToAdd = new HashSet<>();
+        partTypeToAdd.add(xm);
+        try {
+            compatibilityManager.addRequirements(ih, partTypeToAdd);
+        } catch (AlreadyManageException e) {
+            e.printStackTrace();
+        }
+
+        Set<PartType> expectedSetOfPartTypeRequiredForXM = Set.of(ih);
+        Set<PartType> expectedSetOfPartTypeRequiredForIH = Set.of(xm);
+
+        assertEquals(expectedSetOfPartTypeRequiredForIH, compatibilityManager.getRequirements(ih));
+        assertEquals(expectedSetOfPartTypeRequiredForXM, compatibilityManager.getRequirements(xm));
     }
 
     @Test
