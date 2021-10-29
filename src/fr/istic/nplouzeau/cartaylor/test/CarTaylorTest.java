@@ -59,13 +59,6 @@ public class CarTaylorTest {
         mapCategoryPartTypeConfigurator.put(exteriorCategory, exteriorPartTypeSet);
         mapCategoryPartTypeConfigurator.put(interiorCategory, interiorPartTypeSet);
 
-        configurator = new ConfiguratorImpl(compatibilityChecker, mapCategoryPartTypeConfigurator, configuration);
-
-        configuration = new ConfigurationImpl(configurator, compatibilityManager);
-
-        configuration.selectPart(tm5);
-
-
 
         Map<PartType, Set<PartType>> requirements = new HashMap<>();
         requirementsTC120 = new HashSet<>();
@@ -77,6 +70,12 @@ public class CarTaylorTest {
         incompatibilitiesTSF7.add(eg100);
         incompatibilities.put(tsf7, incompatibilitiesTSF7);
 
-        compatibilityManager = new CompatibilityManagerImpl(configurator, requirements, incompatibilities);
+        compatibilityManager = new CompatibilityManagerImpl(requirements, incompatibilities);
+
+        configuration = new ConfigurationImpl(compatibilityManager);
+        configuration.selectPart(tm5);
+
+        configurator = new ConfiguratorImpl(compatibilityChecker, mapCategoryPartTypeConfigurator, configuration);
+
     }
 }
