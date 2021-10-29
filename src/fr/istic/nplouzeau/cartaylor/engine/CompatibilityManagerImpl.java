@@ -14,7 +14,6 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
     private static final String ERR_ALREADY_IN_REQUIREMENTS = "You can't add %s in incompatibilities because it is already in requirements";
     private static final String ERR_ALREADY_IN_INCOMPATIBILITIES = "You can't add %s in requirements because it is already in incompatibilities";
 
-    private Configurator configurator;
     //A set of parts required for the key part
     private Map<PartType, Set<PartType>>  requirements;
     //A set of parts incompatible with the key part
@@ -22,12 +21,10 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     /**
      * Construct CompatibilityManagerImpl
-     * @param configurator the reference to the configurator must be not null
      * @param requirements The map of requirements can be empty or null
      * @param incompatibilities The map of the incompatibilities can be empty or null
      */
-    public CompatibilityManagerImpl(Configurator configurator, Map<PartType, Set<PartType>> requirements, Map<PartType, Set<PartType>> incompatibilities) {
-        this.configurator = Objects.requireNonNull(configurator);
+    public CompatibilityManagerImpl(Map<PartType, Set<PartType>> requirements, Map<PartType, Set<PartType>> incompatibilities) {
         this.requirements = Objects.requireNonNullElse(requirements, new HashMap<>());
         this.incompatibilities = Objects.requireNonNullElse(incompatibilities, new HashMap<>());
     }
