@@ -1,6 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.test;
 
 import fr.istic.nplouzeau.cartaylor.api.PartType;
+import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -36,8 +37,70 @@ public class ConfigurationTest extends CarTaylorTest {
     }
 
     /*
-     * test de la methode isValid ... // TODO faire les autres tests pour la methode isValid
+     * test de la methode isValid en ajoutant des requirements et une configuration qui ne correspond pas à la compatibilité choisie
      */
+    @Test
+    void testIsValidWhenRequirementsDoesNotMatchConfiguration() {
+        Set<PartType> partTypeToAdd = new HashSet<>();
+        partTypeToAdd.add(xm);
+        try {
+            compatibilityManager.addRequirements(ih, partTypeToAdd);
+        } catch (AlreadyManageException e) {
+            e.printStackTrace();
+        }
+        configuration.selectPart(eg100);
+        configuration.selectPart(ih);
+        configuration.selectPart(xs);
+
+
+        assertFalse(configuration.isValid());
+    }
+
+    /*
+     * test de la methode isValid en ajoutant des requirements et une bonne configuration
+     */
+    @Test
+    void testIsValidWhenRequirementsMatchConfiguration() {
+        Set<PartType> partTypeToAdd = new HashSet<>();
+        partTypeToAdd.add(xm);
+        try {
+            compatibilityManager.addRequirements(ih, partTypeToAdd);
+        } catch (AlreadyManageException e) {
+            e.printStackTrace();
+        }
+        configuration.selectPart(eg100);
+        configuration.selectPart(ih);
+        configuration.selectPart(xm);
+
+
+        assertTrue(configuration.isValid());
+    }
+
+    /*
+     *  test de isValid quand on ajoute une parttype qui est dans la liste des incompatibilités, la methode doit donc retrouner faux
+     */
+    @Test
+    void testIsValidWithIncompatibilitiesThatDoesNotMatchWithConfiguration() {
+        configuration.selectPart(eg100);
+        configuration.selectPart(ih);
+        configuration.selectPart(xm);
+        configuration.selectPart(tsf7);
+
+        assertFalse(configuration.isValid());
+    }
+
+    /*
+     *  test de isValid avec des incompatibilités qui marchent
+     */
+    @Test
+    void testIsValidWithIncompatibilitiesThatMatchWithConfiguration() {
+        configuration.selectPart(ed180);
+        configuration.selectPart(ih);
+        configuration.selectPart(xm);
+        configuration.selectPart(tsf7);
+
+        assertTrue(configuration.isValid());
+    }
 
     /*
      * test du getter getSelectedParts
