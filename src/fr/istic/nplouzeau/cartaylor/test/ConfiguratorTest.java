@@ -40,8 +40,7 @@ public class ConfiguratorTest extends CarTaylorTest {
      */
     @Test
     void testGetConfiguration() {
-        // TODO : le test ne passe pas car dans la création du configurator dans CarTaylorTest, la configuration est null car par encore créée
-        //assertEquals(configuration, configurator.getConfiguration());
+        assertEquals(configuration, configurator.getConfiguration());
     }
 
     /*
