@@ -5,7 +5,6 @@ import fr.istic.nplouzeau.cartaylor.engine.CompatibilityManagerImpl;
 import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.util.*;
 
