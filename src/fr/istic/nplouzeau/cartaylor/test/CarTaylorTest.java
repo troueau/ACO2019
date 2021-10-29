@@ -17,7 +17,7 @@ public class CarTaylorTest {
     Map<Category, PartType> mapCategoryPartTypeConfiguration;
 
     Category engineCategory, transmissionCategory, exteriorCategory, interiorCategory;
-    PartType eg100, eh120, ed180, tm5, ta5, tsf7, tc120, xc, xs, in, is, xm, ih;
+    PartType eg100, eg133, ed110, eh120, ed180, tm5, ta5, tsf7, tc120, xc, xs, in, is, xm, ih;
 
     Set<PartType> requirementsTC120, incompatibilitiesTSF7;
 
@@ -34,6 +34,8 @@ public class CarTaylorTest {
         eg100 = new PartTypeImpl("EG100", engineCategory);
         eh120 = new PartTypeImpl("EH120", engineCategory);
         ed180 = new PartTypeImpl("ED180", engineCategory);
+        eg133 = new PartTypeImpl("ED133", engineCategory);
+        ed110 = new PartTypeImpl("ED110", engineCategory);
 
         tm5 = new PartTypeImpl("TM5", transmissionCategory);
         ta5 = new PartTypeImpl("TA5", transmissionCategory);
@@ -50,7 +52,7 @@ public class CarTaylorTest {
 
 
 
-        Set<PartType> enginePartTypeSet = Set.of(eg100, eh120, ed180);
+        Set<PartType> enginePartTypeSet = Set.of(eg100, eh120, ed180, eg133, ed110);
 
         Set<PartType> transmissionPartTypeSet = Set.of(tm5, ta5, tsf7, tc120);
 
@@ -74,6 +76,9 @@ public class CarTaylorTest {
         Map<PartType, Set<PartType>> incompatibilities = new HashMap<>();
         incompatibilitiesTSF7 = new HashSet<>();
         incompatibilitiesTSF7.add(eg100);
+        incompatibilitiesTSF7.add(eg133);
+        incompatibilitiesTSF7.add(ed110);
+
         incompatibilities.put(tsf7, incompatibilitiesTSF7);
 
         compatibilityManager = new CompatibilityManagerImpl(requirements, incompatibilities);

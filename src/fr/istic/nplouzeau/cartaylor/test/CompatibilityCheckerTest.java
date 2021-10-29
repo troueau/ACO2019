@@ -17,7 +17,7 @@ public class CompatibilityCheckerTest extends CarTaylorTest {
     @Test
     void testGetIncompatibilities() {
         assertEquals(incompatibilitiesTSF7, compatibilityManager.getIncompatibilities(tsf7));
-        assertEquals(1, compatibilityManager.getIncompatibilities(tsf7).size());
+        assertEquals(3, compatibilityManager.getIncompatibilities(tsf7).size());
     }
 
     @Test

@@ -126,7 +126,7 @@ public class CompatibilityManagerTest extends CarTaylorTest {
     @Test
     void testRemoveIncompatibilityWhenTargetIsNotInIncompatibilities() {
         assertDoesNotThrow(() -> compatibilityManager.removeIncompatibility(tsf7, is));
-        assertEquals(Set.of(eg100), compatibilityManager.getIncompatibilities(tsf7));
+        assertEquals(Set.of(eg100, eg133, ed110), compatibilityManager.getIncompatibilities(tsf7));
     }
     @Test
     void testRemoveIncompatibilityWhenMappingValueIsNull() {
@@ -135,8 +135,9 @@ public class CompatibilityManagerTest extends CarTaylorTest {
     }
     @Test
     void testRemoveIncompatibility() {
+        Set<PartType> expectedIncompatibilitiesList = Set.of(eg133, ed110);
         assertDoesNotThrow(() -> compatibilityManager.removeIncompatibility(tsf7, eg100));
-        assertEquals(Collections.emptySet(), compatibilityManager.getIncompatibilities(tsf7));
+        assertEquals(expectedIncompatibilitiesList, compatibilityManager.getIncompatibilities(tsf7));
     }
 
     @Test
