@@ -65,7 +65,6 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
 
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) throws AlreadyManageException {
-        lockRequirements = true;
         // Check if one of the new Requirements is not in the Incompatibilites list
         Set<PartType> incompatibilitiesForReference = getIncompatibilities(reference);
         for (PartType elemToAdd : target) {
