@@ -28,11 +28,6 @@ public class CompatibilityManagerTest extends CarTaylorTest {
     }
 
     @Test
-    void testConstructorWithException() {
-        assertThrows(NullPointerException.class,() -> new CompatibilityManagerImpl(emptyHashMap, emptyHashMap));
-    }
-
-    @Test
     void testAddIncompatibilitiesWhenNoPreviousIncompatibilities() {
         Set<PartType> incompatibilitiesEG100 = Set.of(tm5, ta5);
 

@@ -83,7 +83,7 @@ public class CarTaylorTest {
         configuration = new ConfigurationImpl(mapCategoryPartTypeConfiguration, compatibilityManager);
         configuration.selectPart(tm5);
 
-        configurator = new ConfiguratorImpl(compatibilityChecker, mapCategoryPartTypeConfigurator, configuration);
+        configurator = new ConfiguratorImpl(compatibilityManager, mapCategoryPartTypeConfigurator, configuration);
 
     }
 }

@@ -49,7 +49,7 @@ public class ConfiguratorTest extends CarTaylorTest {
      */
     @Test
     void testGetCompatibilityManager() {
-        assertEquals(compatibilityChecker, configurator.getCompatibilityChecker());
+        assertEquals(compatibilityManager, configurator.getCompatibilityChecker());
     }
 
 }

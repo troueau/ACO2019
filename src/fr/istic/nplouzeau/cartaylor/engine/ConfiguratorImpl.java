@@ -4,6 +4,7 @@ import fr.istic.nplouzeau.cartaylor.api.*;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class ConfiguratorImpl implements Configurator {
@@ -14,9 +15,9 @@ public class ConfiguratorImpl implements Configurator {
     private Configuration configuration;
 
     public ConfiguratorImpl(CompatibilityChecker compatibilityChecker, Map<Category, Set<PartType>> mapCategoryPartType, Configuration configuration) {
-        this.compatibilityChecker = compatibilityChecker;
-        this.mapCategoryPartType = mapCategoryPartType;
-        this.configuration = configuration;
+        this.compatibilityChecker = Objects.requireNonNull(compatibilityChecker);
+        this.mapCategoryPartType = Objects.requireNonNull(mapCategoryPartType);
+        this.configuration = Objects.requireNonNull(configuration);
     }
 
 
@@ -27,8 +28,7 @@ public class ConfiguratorImpl implements Configurator {
 
     @Override
     public Set<PartType> getVariants(Category category) {
-        Set<PartType> res = mapCategoryPartType.get(category);
-        res = res == null ? Collections.emptySet() : res;
+        Set<PartType> res = Objects.requireNonNullElse(mapCategoryPartType.get(category),Collections.emptySet());
         return Collections.unmodifiableSet(res);
     }
 
