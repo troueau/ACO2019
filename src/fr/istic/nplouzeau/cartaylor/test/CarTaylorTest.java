@@ -17,7 +17,7 @@ public class CarTaylorTest {
     Map<Category, PartType> mapCategoryPartTypeConfiguration;
 
     Category engineCategory, transmissionCategory, exteriorCategory, interiorCategory;
-    PartType eg100, eh120, tm5, ta5, tsf7, tc120, xc, xs, in, is, xm, ih;
+    PartType eg100, eh120, ed180, tm5, ta5, tsf7, tc120, xc, xs, in, is, xm, ih;
 
     Set<PartType> requirementsTC120, incompatibilitiesTSF7;
 
@@ -33,6 +33,7 @@ public class CarTaylorTest {
 
         eg100 = new PartTypeImpl("EG100", engineCategory);
         eh120 = new PartTypeImpl("EH120", engineCategory);
+        ed180 = new PartTypeImpl("ED180", engineCategory);
 
         tm5 = new PartTypeImpl("TM5", transmissionCategory);
         ta5 = new PartTypeImpl("TA5", transmissionCategory);
@@ -49,7 +50,7 @@ public class CarTaylorTest {
 
 
 
-        Set<PartType> enginePartTypeSet = Set.of(eg100, eh120);
+        Set<PartType> enginePartTypeSet = Set.of(eg100, eh120, ed180);
 
         Set<PartType> transmissionPartTypeSet = Set.of(tm5, ta5, tsf7, tc120);
 
