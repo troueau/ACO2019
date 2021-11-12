@@ -3,6 +3,9 @@ package fr.istic.nplouzeau.cartaylor.engine;
 import fr.istic.nplouzeau.cartaylor.api.Category;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
 
+import java.lang.reflect.Constructor;
+import java.util.logging.Logger;
+
 public class PartTypeImpl implements PartType {
     private String name;
     private Class<? extends PartImpl> classRef;
