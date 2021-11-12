@@ -29,4 +29,14 @@ public class PartTypeImpl implements PartType {
         }
         return null;
     }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public Category getCategory() {
+        return null;
+    }
 }
