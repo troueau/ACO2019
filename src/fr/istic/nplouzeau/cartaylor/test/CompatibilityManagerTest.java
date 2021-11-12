@@ -117,25 +117,7 @@ public class CompatibilityManagerTest extends CarTaylorTest {
         assertThrows(AlreadyManageException.class, () -> compatibilityManager.addRequirements(tsf7, incompatibilitiesTSF7));
     }
 
-    /*
-     * test de l'ajout de requirements symmétrique, c-a-d si on ajoute des requirements pour une PartType, ajoute aussi aux PartType required la PartType source
-     */
-    @Test
-    void testAddRequirementsSymetric() {
-        Set<PartType> partTypeToAdd = new HashSet<>();
-        partTypeToAdd.add(xm);
-        try {
-            compatibilityManager.addRequirements(ih, partTypeToAdd);
-        } catch (AlreadyManageException e) {
-            e.printStackTrace();
-        }
 
-        Set<PartType> expectedSetOfPartTypeRequiredForXM = Set.of(ih);
-        Set<PartType> expectedSetOfPartTypeRequiredForIH = Set.of(xm);
-
-        assertEquals(expectedSetOfPartTypeRequiredForIH, compatibilityManager.getRequirements(ih));
-        assertEquals(expectedSetOfPartTypeRequiredForXM, compatibilityManager.getRequirements(xm));
-    }
 
     /*
      * test remove incompatibilites, une exception est levée

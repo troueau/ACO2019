@@ -76,15 +76,6 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
         Set<PartType> actualPartTypeSet = Objects.requireNonNullElse(requirements.get(reference), new HashSet<>());
         actualPartTypeSet.addAll(target);
 
-        //Ajout symétrique de la PartType
-        if(!lockRequirements) {
-            lockRequirements = true;
-            for(PartType partToAdd : target) {
-                addRequirements(partToAdd, Set.of(reference));
-            }
-            lockRequirements = false;
-        }
-
         requirements.put(reference, actualPartTypeSet);
     }
 
