@@ -8,6 +8,11 @@ import java.util.Set;
  */
 public interface Configuration {
 
+    // TODO : ajouter cette nouvelle implementation
+	/*
+	public Set<Part> getSelectedParts();
+	public Optional<Part> getSelectionForCategory(Category category);*/
+
     /**
      * tell if the current configuration is correct and valid
      * @return boolean telling if the configuration is valid or not
