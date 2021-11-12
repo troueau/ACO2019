@@ -1,5 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.engine;
 
+import fr.istic.nplouzeau.cartaylor.api.Category;
+import fr.istic.nplouzeau.cartaylor.api.Part;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
 
 import java.util.*;
@@ -9,6 +11,16 @@ import java.util.function.Supplier;
 public class PartImpl implements Part {
 
     private PartType type;
+
+    @Override
+    public Category getCategory() {
+        return null;
+    }
+
+    @Override
+    public PartType getType() {
+        return null;
+    }
 
     private class Property {
         public final Supplier<String> getter;
