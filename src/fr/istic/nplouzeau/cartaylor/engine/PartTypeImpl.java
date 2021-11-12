@@ -4,22 +4,25 @@ import fr.istic.nplouzeau.cartaylor.api.Category;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
 
 public class PartTypeImpl implements PartType {
+    private String name;
+    private Class<? extends PartImpl> classRef;
+    private Category category;
 
-    String name;
-    Category category;
-
-    public PartTypeImpl(String name, Category category) {
+    public PartTypeImpl(String name, Class<? extends PartImpl> classRef, Category category) {
         this.name = name;
+        this.classRef = classRef;
         this.category = category;
     }
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public Category getCategory() {
-        return this.category;
+    public PartImpl newInstance() {
+        Constructor<? extends PartImpl> constructor;
+        try {
+            constructor = classRef.getConstructor();
+            return constructor.newInstance();
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, "constructor call failed", e);
+            System.exit(-1);
+        }
+        return null;
     }
 }
