@@ -43,7 +43,7 @@ public class CarTaylorTest {
         tc120 = new PartTypeImpl("TC120", transmissionCategory);
 
         xc = new PartTypeImpl("XC", exteriorCategory);
-        xs = new PartTypeImpl("XS", exteriorCategory);
+        xs = new PartTypeImpl("XS", Exterior.class, exteriorCategory);
         xm = new PartTypeImpl("XM", exteriorCategory);
 
         in = new PartTypeImpl("IN", interiorCategory);
