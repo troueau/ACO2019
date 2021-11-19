@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class PartImpl implements Part {
+public class PartImpl extends PropertyManagerImpl implements Part {
 
     private PartType type;
 

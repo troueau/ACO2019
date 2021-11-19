@@ -1,5 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.engine;
 
+import fr.istic.nplouzeau.cartaylor.api.CompatibilityManager;
+
 import java.util.Objects;
 import java.util.Set;
 
