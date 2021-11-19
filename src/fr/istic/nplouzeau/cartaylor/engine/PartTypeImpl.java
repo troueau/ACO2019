@@ -38,11 +38,11 @@ public class PartTypeImpl implements PartType {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public Category getCategory() {
-        return null;
+        return category;
     }
 }
