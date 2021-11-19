@@ -18,6 +18,12 @@ public class PartTypeImpl implements PartType {
         this.category = category;
     }
 
+    // TODO : to delete after
+    public PartTypeImpl(String name, Category category) {
+        this.name = name;
+        this.category = category;
+    }
+
     public PartImpl newInstance() {
         Constructor<? extends PartImpl> constructor;
         try {
