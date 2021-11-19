@@ -40,7 +40,7 @@ public interface Configuration {
      * select a part of the current configuration
      * @param chosenPart part that we want to select
      */
-    void selectPart(PartType chosenPart);
+    void selectPart(Part chosenPart);
 
     /**
      * clear a category from his partType
