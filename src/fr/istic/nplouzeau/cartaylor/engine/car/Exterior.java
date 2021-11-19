@@ -1,6 +1,6 @@
-package fr.istic.nplouzeau.cartaylor.engine;
+package fr.istic.nplouzeau.cartaylor.engine.car;
 
-import fr.istic.nplouzeau.cartaylor.api.CompatibilityManager;
+import fr.istic.nplouzeau.cartaylor.engine.PartImpl;
 
 import java.util.Objects;
 import java.util.Set;
