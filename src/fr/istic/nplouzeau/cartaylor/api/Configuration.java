@@ -1,6 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.api;
 
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -9,9 +10,19 @@ import java.util.Set;
 public interface Configuration {
 
     // TODO : ajouter cette nouvelle implementation
-	/*
+
+    /**
+     * method to get the parts currently composing the configuration
+     * @return set of type Part
+     */
 	public Set<Part> getSelectedParts();
-	public Optional<Part> getSelectionForCategory(Category category);*/
+
+    /**
+     * get the part selected for a chosen category
+     * @param category chosen category
+     * @return part in type Part
+     */
+	public Optional<Part> getSelectionForCategory(Category category);
 
     /**
      * tell if the current configuration is correct and valid
@@ -26,23 +37,10 @@ public interface Configuration {
     boolean isComplete();
 
     /**
-     * method to get the parts currently composing the configuration
-     * @return set of type PartType
-     */
-    Set<PartType> getSelectedParts();
-
-    /**
      * select a part of the current configuration
      * @param chosenPart part that we want to select
      */
     void selectPart(PartType chosenPart);
-
-    /**
-     * get the part selected for a chosen category
-     * @param category chosen category
-     * @return part in type PartType
-     */
-    PartType getSelectionForCategory(Category category);
 
     /**
      * clear a category from his partType
