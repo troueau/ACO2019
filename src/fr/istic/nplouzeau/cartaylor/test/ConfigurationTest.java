@@ -1,10 +1,14 @@
 package fr.istic.nplouzeau.cartaylor.test;
 
+import fr.istic.nplouzeau.cartaylor.api.Part;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
+import fr.istic.nplouzeau.cartaylor.engine.PartImpl;
+import fr.istic.nplouzeau.cartaylor.engine.PartTypeImpl;
 import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -118,7 +122,11 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testGetSelectionForCategoryWhenPartChosen() {
-        assertEquals(tm5, configuration.getSelectionForCategory(transmissionCategory));
+        Optional<Part> opt = configuration.getSelectionForCategory(transmissionCategory);
+        assertTrue(opt.isPresent());
+        if (opt.isPresent()) {
+            assertEquals(((PartTypeImpl) tm5).newInstance(), configuration.getSelectionForCategory(transmissionCategory).get());
+        }
     }
 
     /*
@@ -126,7 +134,7 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testGetSelectionForCategoryWhenNoPartHasBeenChosen() {
-        assertNull(configuration.getSelectionForCategory(engineCategory));
+        assertFalse(configuration.getSelectionForCategory(engineCategory).isPresent());
     }
 
     /*
