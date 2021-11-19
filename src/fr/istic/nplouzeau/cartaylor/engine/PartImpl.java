@@ -14,12 +14,12 @@ public class PartImpl extends PropertyManagerImpl implements Part {
 
     @Override
     public Category getCategory() {
-        return null;
+        return type.getCategory();
     }
 
     @Override
     public PartType getType() {
-        return null;
+        return type;
     }
 
     private class Property {
