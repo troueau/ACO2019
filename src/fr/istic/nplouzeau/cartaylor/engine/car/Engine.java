@@ -1,4 +1,6 @@
 package fr.istic.nplouzeau.cartaylor.engine.car;
 
-public class Engine {
+import fr.istic.nplouzeau.cartaylor.engine.PartImpl;
+
+public class Engine extends PartImpl  {
 }
