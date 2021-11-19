@@ -2,6 +2,7 @@ package fr.istic.nplouzeau.cartaylor.test;
 
 import fr.istic.nplouzeau.cartaylor.api.*;
 import fr.istic.nplouzeau.cartaylor.engine.*;
+import fr.istic.nplouzeau.cartaylor.engine.car.Exterior;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.*;
@@ -14,7 +15,7 @@ public class CarTaylorTest {
     CompatibilityManager compatibilityManager;
 
     Map<Category, Set<PartType>> mapCategoryPartTypeConfigurator;
-    Map<Category, PartType> mapCategoryPartTypeConfiguration;
+    Map<Category, Part> mapCategoryPartTypeConfiguration;
 
     Category engineCategory, transmissionCategory, exteriorCategory, interiorCategory;
     PartType eg100, eg133, ed110, eh120, ed180, tm5, ta5, tsf7, tc120, xc, xs, in, is, xm, ih;
@@ -44,6 +45,7 @@ public class CarTaylorTest {
 
         xc = new PartTypeImpl("XC", exteriorCategory);
         xs = new PartTypeImpl("XS", Exterior.class, exteriorCategory);
+
         xm = new PartTypeImpl("XM", exteriorCategory);
 
         in = new PartTypeImpl("IN", interiorCategory);
