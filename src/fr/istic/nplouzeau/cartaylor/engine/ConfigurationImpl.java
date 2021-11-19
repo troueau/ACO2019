@@ -7,10 +7,10 @@ import java.util.*;
 public class ConfigurationImpl implements Configuration {
 
     //Contains user's choice
-    private Map<Category, PartType> mapCategoryPartType;
+    private Map<Category, Part> mapCategoryPartType;
     private CompatibilityManager compatibilityManager;
 
-    public ConfigurationImpl(Map<Category, PartType> mapCategoryPartType, CompatibilityManager compatibilityManager) {
+    public ConfigurationImpl(Map<Category, Part> mapCategoryPartType, CompatibilityManager compatibilityManager) {
         this.mapCategoryPartType = mapCategoryPartType;
         this.compatibilityManager = compatibilityManager;
     }
@@ -20,7 +20,7 @@ public class ConfigurationImpl implements Configuration {
     public boolean isValid() {
         if (!isComplete()) return false;
         // Check for all PartType if requirements and incompatibilities are respected
-        for (Map.Entry<Category, PartType> entry1 : mapCategoryPartType.entrySet()) {
+        for (Map.Entry<Category, Part> entry1 : mapCategoryPartType.entrySet()) {
 
             Set<PartType> incompatibilities = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getIncompatibilities(entry1.getValue());
             Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements(entry1.getValue());
@@ -29,7 +29,7 @@ public class ConfigurationImpl implements Configuration {
                 if (!this.getSelectedParts().contains(requiredPartType)) return false;
             }
 
-            for (Map.Entry<Category, PartType> entry2 : mapCategoryPartType.entrySet()) {
+            for (Map.Entry<Category, Part> entry2 : mapCategoryPartType.entrySet()) {
                 if (incompatibilities.contains(entry2.getValue())) return false;
             }
         }
@@ -42,19 +42,20 @@ public class ConfigurationImpl implements Configuration {
     }
 
     @Override
-    public Set<PartType> getSelectedParts() {
-        Set<PartType> setOfSelectedParts = new HashSet<>(mapCategoryPartType.values());
+    public Set<Part> getSelectedParts() {
+        Set<Part> setOfSelectedParts = new HashSet<>(mapCategoryPartType.values());
         return Collections.unmodifiableSet(setOfSelectedParts);
     }
 
     @Override
-    public void selectPart(PartType chosenPart) {
+    public void selectPart(Part chosenPart) {
         mapCategoryPartType.put(chosenPart.getCategory(), chosenPart);
     }
 
     @Override
-    public PartType getSelectionForCategory(Category category) {
-        return mapCategoryPartType.get(category);
+    public Optional<Part> getSelectionForCategory(Category category) {
+        Part part = mapCategoryPartType.get(category);
+        return Objects.isNull(part) ? Optional.empty() : Optional.of(part);
     }
 
     @Override
