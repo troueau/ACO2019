@@ -2,6 +2,7 @@ package fr.istic.nplouzeau.cartaylor.engine;
 
 import fr.istic.nplouzeau.cartaylor.api.*;
 
+import java.io.PrintStream;
 import java.util.*;
 
 public class ConfigurationImpl implements Configuration {
@@ -67,6 +68,14 @@ public class ConfigurationImpl implements Configuration {
     public void clear() {
         for(Category c : mapCategoryPartType.keySet()) {
             this.unselectPartType(c);
+        }
+    }
+    public void printDescription(PrintStream ps) {
+        StringBuilder tmp = new StringBuilder();
+        for (Map.Entry elem : mapCategoryPartType.entrySet()) {
+            tmp.append(elem.getKey().toString());
+            tmp.append("\n");
+            tmp.append(elem.getValue().toString());
         }
     }
 }
