@@ -11,8 +11,8 @@ public class ConfigurationImpl implements Configuration {
     private CompatibilityManager compatibilityManager;
 
     public ConfigurationImpl(Map<Category, PartType> mapCategoryPartType, CompatibilityManager compatibilityManager) {
-        this.mapCategoryPartType = mapCategoryPartType;
-        this.compatibilityManager = compatibilityManager;
+        this.mapCategoryPartType = Objects.requireNonNull(mapCategoryPartType);
+        this.compatibilityManager = Objects.requireNonNull(compatibilityManager);
     }
 
 
@@ -59,7 +59,7 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public void unselectPartType(Category categoryToClear) {
-        mapCategoryPartType.put(categoryToClear, null);
+        mapCategoryPartType.put(Objects.requireNonNull(categoryToClear), null);
     }
 
     @Override
