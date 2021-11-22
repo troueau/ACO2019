@@ -8,9 +8,6 @@ import java.util.Set;
  * A public class to get informations about the configuration
  */
 public interface Configuration {
-
-    // TODO : ajouter cette nouvelle implementation
-
     /**
      * method to get the parts currently composing the configuration
      * @return set of type Part
@@ -40,7 +37,7 @@ public interface Configuration {
      * select a part of the current configuration
      * @param chosenPart part that we want to select
      */
-    void selectPart(Part chosenPart);
+    void selectPart(PartType chosenPart);
 
     /**
      * clear a category from his partType
