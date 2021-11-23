@@ -12,14 +12,14 @@ public interface Configuration {
      * method to get the parts currently composing the configuration
      * @return set of type Part
      */
-	public Set<Part> getSelectedParts();
+	Set<Part> getSelectedParts();
 
     /**
      * get the part selected for a chosen category
      * @param category chosen category
      * @return part in type Part
      */
-	public Optional<Part> getSelectionForCategory(Category category);
+    Optional<Part> getSelectionForCategory(Category category);
 
     /**
      * tell if the current configuration is correct and valid
