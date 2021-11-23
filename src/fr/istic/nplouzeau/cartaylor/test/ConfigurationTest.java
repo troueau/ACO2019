@@ -2,7 +2,6 @@ package fr.istic.nplouzeau.cartaylor.test;
 
 import fr.istic.nplouzeau.cartaylor.api.Part;
 import fr.istic.nplouzeau.cartaylor.api.PartType;
-import fr.istic.nplouzeau.cartaylor.engine.PartImpl;
 import fr.istic.nplouzeau.cartaylor.engine.PartTypeImpl;
 import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
 import org.junit.jupiter.api.Test;
@@ -111,9 +110,10 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testGetSelectedParts() {
-        Set<PartType> expectedSetOfSelectedPartType = new HashSet<>();
+        Set<Part> expectedSetOfSelectedPartType = new HashSet<>();
         expectedSetOfSelectedPartType.add(null); //Dans la configuration si il y a un ou + PartType qui ne sont pas selectionnés, alors il y a une valeur null dans le set
-        expectedSetOfSelectedPartType.add(tm5);
+        // FIXME: on créés un nouvelle instance donc quand on compare celle là et celle créée dans CarTaylorTest ce n'est pas la même | Trouver un moyen de retrouver la même instance
+        expectedSetOfSelectedPartType.add(((PartTypeImpl) tm5).newInstance());
         assertEquals(expectedSetOfSelectedPartType, configuration.getSelectedParts());
     }
 
@@ -125,6 +125,7 @@ public class ConfigurationTest extends CarTaylorTest {
         Optional<Part> opt = configuration.getSelectionForCategory(transmissionCategory);
         assertTrue(opt.isPresent());
         if (opt.isPresent()) {
+            // FIXME: on créés un nouvelle instance donc quand on compare celle là et celle créée dans CarTaylorTest ce n'est pas la même | Trouver un moyen de retrouver la même instance
             assertEquals(((PartTypeImpl) tm5).newInstance(), configuration.getSelectionForCategory(transmissionCategory).get());
         }
     }
@@ -150,9 +151,10 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testSelectPartOnCurrentConfiguration() {
-        assertNull(configuration.getSelectionForCategory(engineCategory));
+        assertEquals(Optional.empty(), configuration.getSelectionForCategory(engineCategory));
         configuration.selectPart(eg100);
-        assertEquals(eg100, configuration.getSelectionForCategory(engineCategory));
+        // FIXME: on créés un nouvelle instance donc quand on compare celle là et celle créée dans CarTaylorTest ce n'est pas la même | Trouver un moyen de retrouver la même instance
+        assertEquals(Optional.of(((PartTypeImpl)eg100).newInstance()), configuration.getSelectionForCategory(engineCategory));
     }
 
     /*
@@ -161,9 +163,10 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testSelectPartWhenAlreadySelected() {
-        assertEquals(tm5, configuration.getSelectionForCategory(transmissionCategory));
+        // FIXME: on créés un nouvelle instance donc quand on compare celle là et celle créée dans CarTaylorTest ce n'est pas la même | Trouver un moyen de retrouver la même instance
+        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()), configuration.getSelectionForCategory(transmissionCategory));
         configuration.selectPart(tm5);
-        assertEquals(tm5, configuration.getSelectionForCategory(transmissionCategory));
+        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()), configuration.getSelectionForCategory(transmissionCategory));
     }
 
     /*
@@ -171,9 +174,8 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testUnselectPart() {
-        assertEquals(tm5, configuration.getSelectionForCategory(transmissionCategory));
         configuration.unselectPartType(transmissionCategory);
-        assertNull(configuration.getSelectionForCategory(transmissionCategory));
+        assertEquals(Optional.empty(), configuration.getSelectionForCategory(transmissionCategory));
     }
 
     /*
@@ -181,10 +183,10 @@ public class ConfigurationTest extends CarTaylorTest {
      * TEST SANS INTERET ?
      */
     @Test
-    void testUnselectPartWhenAlreadyNull() {
-        assertNull(configuration.getSelectionForCategory(interiorCategory));
+    void testUnselectPartWhenAlreadyEmpty() {
+        assertEquals(Optional.empty(), configuration.getSelectionForCategory(interiorCategory));
         configuration.unselectPartType(interiorCategory);
-        assertNull(configuration.getSelectionForCategory(interiorCategory));
+        assertEquals(Optional.empty(), configuration.getSelectionForCategory(interiorCategory));
     }
 
     /*
@@ -192,15 +194,11 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testClear() {
-        //On verifie déjà que la configuration n'est pas vide avant de clear
-        Set<PartType> expectedSetOfSelectedPartType = new HashSet<>();
-        expectedSetOfSelectedPartType.add(null);
-        expectedSetOfSelectedPartType.add(tm5);
-        assertEquals(expectedSetOfSelectedPartType, configuration.getSelectedParts());
+        //On clear la config et on verifie qu'elle renvoie bien un Set vide
+        Set<Part> expectedSetOfParts = new HashSet<>();
+        expectedSetOfParts.add(null);
 
-        //On clear la config et on verifie qu'elle est bien null
         configuration.clear();
-        expectedSetOfSelectedPartType.remove(tm5);
-        assertEquals(expectedSetOfSelectedPartType, configuration.getSelectedParts());
+        assertEquals(expectedSetOfParts, configuration.getSelectedParts());
     }
 }
