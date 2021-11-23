@@ -2,7 +2,10 @@ package fr.istic.nplouzeau.cartaylor.test;
 
 import fr.istic.nplouzeau.cartaylor.api.*;
 import fr.istic.nplouzeau.cartaylor.engine.*;
+import fr.istic.nplouzeau.cartaylor.engine.car.Engine;
 import fr.istic.nplouzeau.cartaylor.engine.car.Exterior;
+import fr.istic.nplouzeau.cartaylor.engine.car.Interior;
+import fr.istic.nplouzeau.cartaylor.engine.car.Transmission;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.*;
@@ -32,25 +35,24 @@ public class CarTaylorTest {
         exteriorCategory = new CategoryImpl("Exterior");
         interiorCategory = new CategoryImpl("Interior");
 
-        eg100 = new PartTypeImpl("EG100", engineCategory);
-        eh120 = new PartTypeImpl("EH120", engineCategory);
-        ed180 = new PartTypeImpl("ED180", engineCategory);
-        eg133 = new PartTypeImpl("ED133", engineCategory);
-        ed110 = new PartTypeImpl("ED110", engineCategory);
+        eg100 = new PartTypeImpl("EG100", Engine.class, engineCategory);
+        eh120 = new PartTypeImpl("EH120", Engine.class, engineCategory);
+        ed180 = new PartTypeImpl("ED180", Engine.class, engineCategory);
+        eg133 = new PartTypeImpl("ED133", Engine.class, engineCategory);
+        ed110 = new PartTypeImpl("ED110", Engine.class, engineCategory);
 
-        tm5 = new PartTypeImpl("TM5", transmissionCategory);
-        ta5 = new PartTypeImpl("TA5", transmissionCategory);
-        tsf7 = new PartTypeImpl("TSF7", transmissionCategory);
-        tc120 = new PartTypeImpl("TC120", transmissionCategory);
+        tm5 = new PartTypeImpl("TM5", Transmission.class,transmissionCategory);
+        ta5 = new PartTypeImpl("TA5", Transmission.class, transmissionCategory);
+        tsf7 = new PartTypeImpl("TSF7", Transmission.class, transmissionCategory);
+        tc120 = new PartTypeImpl("TC120", Transmission.class, transmissionCategory);
 
-        xc = new PartTypeImpl("XC", exteriorCategory);
+        xc = new PartTypeImpl("XC", Exterior.class, exteriorCategory);
         xs = new PartTypeImpl("XS", Exterior.class, exteriorCategory);
+        xm = new PartTypeImpl("XM", Exterior.class, exteriorCategory);
 
-        xm = new PartTypeImpl("XM", exteriorCategory);
-
-        in = new PartTypeImpl("IN", interiorCategory);
-        is = new PartTypeImpl("IS", interiorCategory);
-        ih = new PartTypeImpl("IH", interiorCategory);
+        in = new PartTypeImpl("IN", Interior.class, interiorCategory);
+        is = new PartTypeImpl("IS", Interior.class, interiorCategory);
+        ih = new PartTypeImpl("IH", Interior.class, interiorCategory);
 
 
 
@@ -80,7 +82,6 @@ public class CarTaylorTest {
         incompatibilitiesTSF7.add(eg100);
         incompatibilitiesTSF7.add(eg133);
         incompatibilitiesTSF7.add(ed110);
-
         incompatibilities.put(tsf7, incompatibilitiesTSF7);
 
         compatibilityManager = new CompatibilityManagerImpl(requirements, incompatibilities);
@@ -93,6 +94,7 @@ public class CarTaylorTest {
         mapCategoryPartTypeConfiguration.put(interiorCategory, null);
 
         configuration = new ConfigurationImpl(mapCategoryPartTypeConfiguration, compatibilityManager);
+
         configuration.selectPart(tm5);
 
         configurator = new ConfiguratorImpl(compatibilityManager, mapCategoryPartTypeConfigurator, configuration);
