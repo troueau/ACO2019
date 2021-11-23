@@ -22,8 +22,8 @@ public class ConfigurationImpl implements Configuration {
         // Check for all PartType if requirements and incompatibilities are respected
         for (Map.Entry<Category, Part> entry1 : mapCategoryPartType.entrySet()) {
 
-            Set<PartType> incompatibilities = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getIncompatibilities((PartType)entry1.getValue());
-            Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements((PartType)entry1.getValue());
+            Set<PartType> incompatibilities = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getIncompatibilities(entry1.getValue().getType());
+            Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements(entry1.getValue().getType());
 
             for (PartType requiredPartType : requirements) {
                 if (!this.getSelectedParts().contains(requiredPartType)) return false;
@@ -65,8 +65,6 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public void clear() {
-        for(Category c : mapCategoryPartType.keySet()) {
-            this.unselectPartType(c);
-        }
+        mapCategoryPartType.keySet().forEach(this::unselectPartType);
     }
 }
