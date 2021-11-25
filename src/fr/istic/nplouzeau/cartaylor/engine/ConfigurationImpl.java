@@ -45,6 +45,7 @@ public class ConfigurationImpl implements Configuration {
     @Override
     public Set<Part> getSelectedParts() {
         Set<Part> setOfSelectedParts = new HashSet<>(mapCategoryPartType.values());
+        setOfSelectedParts.remove(null);
         return Collections.unmodifiableSet(setOfSelectedParts);
     }
 
