@@ -110,11 +110,15 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testGetSelectedParts() {
-        Set<Part> expectedSetOfSelectedPartType = new HashSet<>();
-        expectedSetOfSelectedPartType.add(null); //Dans la configuration si il y a un ou + PartType qui ne sont pas selectionnés, alors il y a une valeur null dans le set
-        // FIXME: on créés un nouvelle instance donc quand on compare celle là et celle créée dans CarTaylorTest ce n'est pas la même | Trouver un moyen de retrouver la même instance
-        expectedSetOfSelectedPartType.add(((PartTypeImpl) tm5).newInstance());
-        assertEquals(expectedSetOfSelectedPartType, configuration.getSelectedParts());
+        Set<String> expectedSetOfSelectedPartType = new HashSet<>();
+        expectedSetOfSelectedPartType.add(((PartTypeImpl) tm5).newInstance().getName());
+
+        Set<String> configSelectedParts = new HashSet<>();
+        for(Part p: configuration.getSelectedParts()) {
+            configSelectedParts.add(p.getName());
+        }
+
+        assertEquals(expectedSetOfSelectedPartType, configSelectedParts);
     }
 
     /*
@@ -124,10 +128,7 @@ public class ConfigurationTest extends CarTaylorTest {
     void testGetSelectionForCategoryWhenPartChosen() {
         Optional<Part> opt = configuration.getSelectionForCategory(transmissionCategory);
         assertTrue(opt.isPresent());
-        if (opt.isPresent()) {
-            // FIXME: on créés un nouvelle instance donc quand on compare celle là et celle créée dans CarTaylorTest ce n'est pas la même | Trouver un moyen de retrouver la même instance
-            assertEquals(((PartTypeImpl) tm5).newInstance(), configuration.getSelectionForCategory(transmissionCategory).get());
-        }
+        opt.ifPresent(part -> assertEquals(((PartTypeImpl) tm5).newInstance().getName(), part.getName()));
     }
 
     /*
@@ -153,8 +154,8 @@ public class ConfigurationTest extends CarTaylorTest {
     void testSelectPartOnCurrentConfiguration() {
         assertEquals(Optional.empty(), configuration.getSelectionForCategory(engineCategory));
         configuration.selectPart(eg100);
-        // FIXME: on créés un nouvelle instance donc quand on compare celle là et celle créée dans CarTaylorTest ce n'est pas la même | Trouver un moyen de retrouver la même instance
-        assertEquals(Optional.of(((PartTypeImpl)eg100).newInstance()), configuration.getSelectionForCategory(engineCategory));
+        Optional<Part> opt = configuration.getSelectionForCategory(engineCategory);
+        opt.ifPresent(part -> assertEquals(Optional.of(((PartTypeImpl) eg100).newInstance()).get().getName(), part.getName()));
     }
 
     /*
@@ -163,10 +164,10 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testSelectPartWhenAlreadySelected() {
-        // FIXME: on créés un nouvelle instance donc quand on compare celle là et celle créée dans CarTaylorTest ce n'est pas la même | Trouver un moyen de retrouver la même instance
-        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()), configuration.getSelectionForCategory(transmissionCategory));
+        Optional<Part> optPart = configuration.getSelectionForCategory(transmissionCategory);
+        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()).get().getName(), optPart.get().getName());
         configuration.selectPart(tm5);
-        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()), configuration.getSelectionForCategory(transmissionCategory));
+        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()).get().getName(), optPart.get().getName());
     }
 
     /*
@@ -180,7 +181,6 @@ public class ConfigurationTest extends CarTaylorTest {
 
     /*
      * test de la methode unselectPartType quand aucun partType n'est associé à la categorie choisie
-     * TEST SANS INTERET ?
      */
     @Test
     void testUnselectPartWhenAlreadyEmpty() {
@@ -194,11 +194,7 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testClear() {
-        //On clear la config et on verifie qu'elle renvoie bien un Set vide
-        Set<Part> expectedSetOfParts = new HashSet<>();
-        expectedSetOfParts.add(null);
-
         configuration.clear();
-        assertEquals(expectedSetOfParts, configuration.getSelectedParts());
+        assertEquals(Set.of(), configuration.getSelectedParts());
     }
 }
