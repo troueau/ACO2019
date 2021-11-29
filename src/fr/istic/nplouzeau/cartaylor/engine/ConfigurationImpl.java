@@ -84,8 +84,14 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public double getPrice() {
-        // TODO
-        return 0;
+        double totalPrice = 0.0;
+        if (this.isValid()) {
+            Set<Part> selectedParts = this.getSelectedParts();
+            for (Part part : selectedParts) {
+                totalPrice += part.getPrice();
+            }
+        }
+        return totalPrice;
     }
 
 
