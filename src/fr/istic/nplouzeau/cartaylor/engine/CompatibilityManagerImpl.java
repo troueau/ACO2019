@@ -16,7 +16,6 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
     //A set of parts incompatible with the key part
     private Map<PartType, Set<PartType>> incompatibilities;
 
-    private boolean lockRequirements;
     /**
      * Construct CompatibilityManagerImpl
      * @param requirements The map of requirements can be empty or null
@@ -25,7 +24,6 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
     public CompatibilityManagerImpl(Map<PartType, Set<PartType>> requirements, Map<PartType, Set<PartType>> incompatibilities) {
         this.requirements = Objects.requireNonNullElse(requirements, new HashMap<>());
         this.incompatibilities = Objects.requireNonNullElse(incompatibilities, new HashMap<>());
-        this.lockRequirements = false;
     }
 
     @Override
