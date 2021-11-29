@@ -79,6 +79,7 @@ public class PartImpl extends PropertyManagerImpl implements Part {
         return Collections.emptySet();
     }
 
+    @Override
     public double getPrice() {
         return price;
     }
