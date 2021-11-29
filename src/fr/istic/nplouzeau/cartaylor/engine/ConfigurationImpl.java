@@ -26,12 +26,13 @@ public class ConfigurationImpl implements Configuration {
             Set<PartType> incompatibilities = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getIncompatibilities(entry1.getValue().getType());
             Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements(entry1.getValue().getType());
 
-            for (PartType requiredPartType : requirements) {
-                if (!this.getSelectedParts().contains(requiredPartType)) return false;
-            }
+            Set<PartType> selectedPartType = convertSetOfPartToSetOfPartType(this.getSelectedParts());
+
+            if (!selectedPartType.containsAll(requirements)) return false;
+
 
             for (Map.Entry<Category, Part> entry2 : mapCategoryPartType.entrySet()) {
-                if (incompatibilities.contains(entry2.getValue())) return false;
+                if (incompatibilities.contains(entry2.getValue().getType())) return false;
             }
         }
         return true;
@@ -81,5 +82,15 @@ public class ConfigurationImpl implements Configuration {
             tmp.append("\n");
             tmp.append(elem.getValue().toString());
         }
+    }
+
+
+
+    private Set<PartType> convertSetOfPartToSetOfPartType(Set<Part> l) {
+        Set<PartType> ret = new HashSet<>();
+        for (Part elem : l) {
+            ret.add(elem.getType());
+        }
+        return ret;
     }
 }
