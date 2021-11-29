@@ -9,4 +9,6 @@ public interface Part extends PropertyManager {
 	Category getCategory();
 
 	PartType getType();
+	
+	double getPrice();
 }
