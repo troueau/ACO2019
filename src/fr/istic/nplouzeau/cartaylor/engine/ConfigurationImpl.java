@@ -73,13 +73,19 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public void printDescription(PrintStream ps) {
-        // TODO 
+        // TODO
         StringBuilder tmp = new StringBuilder();
         mapCategoryPartType.forEach((key, value) -> {
             tmp.append(key.toString());
             tmp.append("\n");
             tmp.append(value.toString());
         });
+    }
+
+    @Override
+    public double getPrice() {
+        // TODO
+        return 0;
     }
 
 

@@ -57,4 +57,11 @@ public interface Configuration {
      */
     void printDescription(PrintStream ps);
 
+    /**
+     * method to get the price of the current configuration
+     * The configuration must be valid
+     * @return the price of the configuration, 0 if the configuration is not valid
+     */
+    double getPrice();
+
 }
