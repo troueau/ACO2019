@@ -71,17 +71,15 @@ public class ConfigurationImpl implements Configuration {
         mapCategoryPartType.keySet().forEach(this::unselectPartType);
     }
 
-    /**
-     * print an HTML descrption of current configuration
-     * @param ps a PrintStream
-     */
+    @Override
     public void printDescription(PrintStream ps) {
+        // TODO 
         StringBuilder tmp = new StringBuilder();
-        for (Map.Entry elem : mapCategoryPartType.entrySet()) {
-            tmp.append(elem.getKey().toString());
+        mapCategoryPartType.forEach((key, value) -> {
+            tmp.append(key.toString());
             tmp.append("\n");
-            tmp.append(elem.getValue().toString());
-        }
+            tmp.append(value.toString());
+        });
     }
 
 

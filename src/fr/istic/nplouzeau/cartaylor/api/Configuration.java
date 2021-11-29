@@ -1,6 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.api;
 
 
+import java.io.PrintStream;
 import java.util.Optional;
 import java.util.Set;
 
@@ -49,5 +50,11 @@ public interface Configuration {
      * method to clear all the current configuration
      */
     void clear();
+
+    /**
+     * print an HTML descrption of current configuration
+     * @param ps a PrintStream
+     */
+    void printDescription(PrintStream ps);
 
 }
