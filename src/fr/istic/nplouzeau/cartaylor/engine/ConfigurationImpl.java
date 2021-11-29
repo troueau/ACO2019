@@ -19,7 +19,6 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public boolean isValid() {
-        if (!isComplete()) return false;
         // Check for all PartType if requirements and incompatibilities are respected
         for (Map.Entry<Category, Part> entry1 : mapCategoryPartType.entrySet()) {
 
