@@ -27,7 +27,15 @@ public class ConfigurationImpl implements Configuration {
             Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements(entry1.getValue().getType());
 
             for (PartType requiredPartType : requirements) {
-                if (!this.getSelectedParts().contains(requiredPartType)) return false;
+                //Current solution, might not be good
+                Set<String> configSelectedParts = new HashSet<>();
+                for(Part p: this.getSelectedParts()) {
+                    configSelectedParts.add(p.getName());
+                }
+                if(!configSelectedParts.contains(requiredPartType.getName())) return false;
+
+                //Old code, does not work with v2
+                /*if (!this.getSelectedParts().contains(requiredPartType)) return false;*/
             }
 
             for (Map.Entry<Category, Part> entry2 : mapCategoryPartType.entrySet()) {
