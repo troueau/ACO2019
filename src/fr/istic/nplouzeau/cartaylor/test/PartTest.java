@@ -24,4 +24,9 @@ public class PartTest extends CarTaylorTest {
 
         assertEquals(tm5, tm5Part.getType());
     }
+
+    @Test
+    void testGetName() {
+        assertEquals("TM5", tm5.getName());
+    }
 }
