@@ -80,7 +80,7 @@ public class ConfigurationTest extends CarTaylorTest {
     }
 
     /*
-     *  test de isValid quand on ajoute une parttype qui est dans la liste des incompatibilités, la methode doit donc retrouner faux
+     *  test de isValid quand on ajoute une part qui est dans la liste des incompatibilités, la methode doit donc retrouner faux
      */
     @Test
     void testIsValidWithIncompatibilitiesThatDoesNotMatchWithConfiguration() {
@@ -113,6 +113,7 @@ public class ConfigurationTest extends CarTaylorTest {
         Set<String> expectedSetOfSelectedPartType = new HashSet<>();
         expectedSetOfSelectedPartType.add(((PartTypeImpl) tm5).newInstance().getName());
 
+        //just get the name (String) of the selected parts of the current configuration
         Set<String> configSelectedParts = new HashSet<>();
         for(Part p: configuration.getSelectedParts()) {
             configSelectedParts.add(p.getName());
@@ -127,7 +128,6 @@ public class ConfigurationTest extends CarTaylorTest {
     @Test
     void testGetSelectionForCategoryWhenPartChosen() {
         Optional<Part> opt = configuration.getSelectionForCategory(transmissionCategory);
-        assertTrue(opt.isPresent());
         opt.ifPresent(part -> assertEquals(((PartTypeImpl) tm5).newInstance().getName(), part.getName()));
     }
 
