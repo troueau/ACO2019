@@ -16,4 +16,11 @@ public interface PartType {
      * @return category
      */
     Category getCategory();
+
+
+    /**
+     * get the price for the current part
+     * @return the price
+     */
+    double getPrice();
 }

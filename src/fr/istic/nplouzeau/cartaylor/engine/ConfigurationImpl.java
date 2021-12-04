@@ -86,7 +86,7 @@ public class ConfigurationImpl implements Configuration {
         if (this.isValid()) {
             Set<Part> selectedParts = this.getSelectedParts();
             for (Part part : selectedParts) {
-                totalPrice += part.getPrice();
+                totalPrice += part.getType().getPrice();
             }
         }
         return totalPrice;

@@ -41,4 +41,7 @@ public class PartTypeImpl implements PartType {
     public Category getCategory() {
         return category;
     }
+
+    @Override
+    public double getPrice() { return price;  }
 }
