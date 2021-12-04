@@ -29,7 +29,6 @@ public class ConfigurationImpl implements Configuration {
 
             if (!selectedPartType.containsAll(requirements)) return false;
 
-
             for (Map.Entry<Category, Part> entry2 : mapCategoryPartType.entrySet()) {
                 if (incompatibilities.contains(entry2.getValue().getType())) return false;
             }
@@ -92,8 +91,6 @@ public class ConfigurationImpl implements Configuration {
         }
         return totalPrice;
     }
-
-
 
     private Set<PartType> convertSetOfPartToSetOfPartType(Set<Part> l) {
         Set<PartType> ret = new HashSet<>();
