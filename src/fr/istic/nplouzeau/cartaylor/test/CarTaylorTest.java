@@ -25,6 +25,7 @@ public class CarTaylorTest {
 
     Set<PartType> requirementsTC120, incompatibilitiesTSF7;
 
+    double espilon = 0.0001;
     /**
      * Create the configuration with all the requirements incompatibilities, partType...
      */

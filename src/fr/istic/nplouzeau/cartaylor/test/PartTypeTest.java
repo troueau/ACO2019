@@ -20,4 +20,13 @@ public class PartTypeTest extends CarTaylorTest {
     public void testGetNameCategory() {
         assertEquals(engineCategory, eg100.getCategory());
     }
+
+    /*
+     * Test du getter getPrice
+     */
+    @Test
+    public void testGetPrice() {
+        assertEquals(500.0, eg100.getPrice(), espilon);
+    }
+
 }
