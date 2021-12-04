@@ -13,6 +13,10 @@ public class PartImpl extends PropertyManagerImpl implements Part {
     private PartType type;
     private double price;
 
+    public PartImpl(PartType type, double price) {
+        this.type = Objects.requireNonNull(type);
+        this.price = price;
+    }
 
     @Override
     public Category getCategory() {
