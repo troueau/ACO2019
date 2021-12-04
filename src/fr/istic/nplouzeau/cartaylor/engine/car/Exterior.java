@@ -1,5 +1,6 @@
 package fr.istic.nplouzeau.cartaylor.engine.car;
 
+import fr.istic.nplouzeau.cartaylor.api.PartType;
 import fr.istic.nplouzeau.cartaylor.engine.PartImpl;
 
 import java.util.Objects;
@@ -13,6 +14,10 @@ enum Color {
 
 public class Exterior extends PartImpl {
     private Color paintColor = Color.WHITE;
+
+    public Exterior(PartType type, double price) {
+        super(type, price);
+    }
 
     public String getColor() {
         return paintColor.name();
