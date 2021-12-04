@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +17,12 @@ public class PropertyTest extends CarTaylorTest {
     @Test
     void testGetProperty() {
         assertEquals(Optional.of("WHITE"), ((PartTypeImpl)xm).newInstance().getProperty("paintColor"));
+    }
+
+    @DisplayName("Test for getProperty for a property that does not exist")
+    @Test
+    void testGetPropertyWhenItDoesNotExist() {
+        assertEquals(Optional.empty(), ((PartTypeImpl)xm).newInstance().getProperty("testProperty"));
     }
 
     @DisplayName("Test set a property values")
@@ -39,5 +46,19 @@ public class PropertyTest extends CarTaylorTest {
     void testGetAvailablePropertyValues() {
         Set<String> expectedAvailablePropertyValues = Set.of("BLUE", "RED");
         assertEquals(expectedAvailablePropertyValues, ((PartTypeImpl)xm).newInstance().getAvailablePropertyValues("paintColor"));
+    }
+
+    @DisplayName("Test getAvailablePropertyValues when the property does not exist")
+    @Test
+    void testGetAvailablePropertyValuesWhenPropertyDoesNotExist() {
+        assertEquals(Collections.emptySet(), ((PartTypeImpl)xm).newInstance().getAvailablePropertyValues("testProperty"));
+    }
+
+    @DisplayName("Test get property names")
+    @Test
+    void testGetPropertyNames() {
+        Set<String> expectedPropertyNames = Set.of("paintColor");
+
+        assertEquals(expectedPropertyNames, ((PartTypeImpl)xm).newInstance().getPropertyNames());
     }
 }
