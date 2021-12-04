@@ -27,7 +27,7 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testIsValidWhenNoIncompatibilitiesAndNoRequirements() {
-        //On complete la configuration avec des PartType au hasard
+        //On complete la configuration avec des Part au hasard
         configuration.selectPart(eg100);
         configuration.selectPart(in);
         configuration.selectPart(xc);
@@ -110,13 +110,13 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testGetSelectedParts() {
-        Set<String> expectedSetOfSelectedPartType = new HashSet<>();
-        expectedSetOfSelectedPartType.add(((PartTypeImpl) tm5).newInstance().getName());
+        Set<PartType> expectedSetOfSelectedPartType = new HashSet<>();
+        expectedSetOfSelectedPartType.add(((PartTypeImpl) tm5).newInstance().getType());
 
         //just get the name (String) of the selected parts of the current configuration
-        Set<String> configSelectedParts = new HashSet<>();
+        Set<PartType> configSelectedParts = new HashSet<>();
         for(Part p: configuration.getSelectedParts()) {
-            configSelectedParts.add(p.getName());
+            configSelectedParts.add(p.getType());
         }
 
         assertEquals(expectedSetOfSelectedPartType, configSelectedParts);
@@ -128,7 +128,7 @@ public class ConfigurationTest extends CarTaylorTest {
     @Test
     void testGetSelectionForCategoryWhenPartChosen() {
         Optional<Part> opt = configuration.getSelectionForCategory(transmissionCategory);
-        opt.ifPresent(part -> assertEquals(((PartTypeImpl) tm5).newInstance().getName(), part.getName()));
+        opt.ifPresent(part -> assertEquals(((PartTypeImpl) tm5).newInstance().getType(), part.getType()));
     }
 
     /*
@@ -155,19 +155,18 @@ public class ConfigurationTest extends CarTaylorTest {
         assertEquals(Optional.empty(), configuration.getSelectionForCategory(engineCategory));
         configuration.selectPart(eg100);
         Optional<Part> opt = configuration.getSelectionForCategory(engineCategory);
-        opt.ifPresent(part -> assertEquals(Optional.of(((PartTypeImpl) eg100).newInstance()).get().getName(), part.getName()));
+        opt.ifPresent(part -> assertEquals(Optional.of(((PartTypeImpl) eg100).newInstance()).get().getType(), part.getType()));
     }
 
     /*
      * test de la methode selectPart quand la partType que l'on selectionne est deja dans la configuration
-     * PAS TROP D'INTERET !
      */
     @Test
     void testSelectPartWhenAlreadySelected() {
         Optional<Part> optPart = configuration.getSelectionForCategory(transmissionCategory);
-        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()).get().getName(), optPart.get().getName());
+        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()).get().getType(), optPart.get().getType());
         configuration.selectPart(tm5);
-        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()).get().getName(), optPart.get().getName());
+        assertEquals(Optional.of(((PartTypeImpl)tm5).newInstance()).get().getType(), optPart.get().getType());
     }
 
     /*
