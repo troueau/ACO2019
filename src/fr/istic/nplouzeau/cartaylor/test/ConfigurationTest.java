@@ -19,7 +19,7 @@ public class ConfigurationTest extends CarTaylorTest {
      */
     @Test
     void testIsValidWhenConfigurationIsNotComplete() {
-        assertFalse(configuration.isValid());
+        assertTrue(configuration.isValid());
     }
 
     /*

@@ -21,16 +21,19 @@ public class ConfigurationImpl implements Configuration {
     public boolean isValid() {
         // Check for all PartType if requirements and incompatibilities are respected
         for (Map.Entry<Category, Part> entry1 : mapCategoryPartType.entrySet()) {
+            if (!Objects.isNull(entry1.getValue())) {
+                Set<PartType> incompatibilities = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getIncompatibilities(entry1.getValue().getType());
+                Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements(entry1.getValue().getType());
 
-            Set<PartType> incompatibilities = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getIncompatibilities(entry1.getValue().getType());
-            Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements(entry1.getValue().getType());
+                Set<PartType> selectedPartType = convertSetOfPartToSetOfPartType(this.getSelectedParts());
 
-            Set<PartType> selectedPartType = convertSetOfPartToSetOfPartType(this.getSelectedParts());
+                if (!selectedPartType.containsAll(requirements)) return false;
 
-            if (!selectedPartType.containsAll(requirements)) return false;
-
-            for (Map.Entry<Category, Part> entry2 : mapCategoryPartType.entrySet()) {
-                if (incompatibilities.contains(entry2.getValue().getType())) return false;
+                for (Map.Entry<Category, Part> entry2 : mapCategoryPartType.entrySet()) {
+                    if (!Objects.isNull(entry2.getValue()) && incompatibilities.contains(entry2.getValue().getType())) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
