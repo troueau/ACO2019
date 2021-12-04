@@ -35,24 +35,24 @@ public class CarTaylorTest {
         exteriorCategory = new CategoryImpl("Exterior");
         interiorCategory = new CategoryImpl("Interior");
 
-        eg100 = new PartTypeImpl("EG100", Engine.class, engineCategory);
-        eh120 = new PartTypeImpl("EH120", Engine.class, engineCategory);
-        ed180 = new PartTypeImpl("ED180", Engine.class, engineCategory);
-        eg133 = new PartTypeImpl("ED133", Engine.class, engineCategory);
-        ed110 = new PartTypeImpl("ED110", Engine.class, engineCategory);
+        eg100 = new PartTypeImpl("EG100", Engine.class, engineCategory, 500.0);
+        eh120 = new PartTypeImpl("EH120", Engine.class, engineCategory, 850.0);
+        ed180 = new PartTypeImpl("ED180", Engine.class, engineCategory, 900.0);
+        eg133 = new PartTypeImpl("ED133", Engine.class, engineCategory, 550.0);
+        ed110 = new PartTypeImpl("ED110", Engine.class, engineCategory, 600.0);
 
-        tm5 = new PartTypeImpl("TM5", Transmission.class,transmissionCategory);
-        ta5 = new PartTypeImpl("TA5", Transmission.class, transmissionCategory);
-        tsf7 = new PartTypeImpl("TSF7", Transmission.class, transmissionCategory);
-        tc120 = new PartTypeImpl("TC120", Transmission.class, transmissionCategory);
+        tm5 = new PartTypeImpl("TM5", Transmission.class,transmissionCategory, 650.0);
+        ta5 = new PartTypeImpl("TA5", Transmission.class, transmissionCategory, 660.0);
+        tsf7 = new PartTypeImpl("TSF7", Transmission.class, transmissionCategory, 800.0);
+        tc120 = new PartTypeImpl("TC120", Transmission.class, transmissionCategory, 900.0);
 
-        xc = new PartTypeImpl("XC", Exterior.class, exteriorCategory);
-        xs = new PartTypeImpl("XS", Exterior.class, exteriorCategory);
-        xm = new PartTypeImpl("XM", Exterior.class, exteriorCategory);
+        xc = new PartTypeImpl("XC", Exterior.class, exteriorCategory, 587.0);
+        xs = new PartTypeImpl("XS", Exterior.class, exteriorCategory, 900.0);
+        xm = new PartTypeImpl("XM", Exterior.class, exteriorCategory, 800.0);
 
-        in = new PartTypeImpl("IN", Interior.class, interiorCategory);
-        is = new PartTypeImpl("IS", Interior.class, interiorCategory);
-        ih = new PartTypeImpl("IH", Interior.class, interiorCategory);
+        in = new PartTypeImpl("IN", Interior.class, interiorCategory, 100.0);
+        is = new PartTypeImpl("IS", Interior.class, interiorCategory, 230.0);
+        ih = new PartTypeImpl("IH", Interior.class, interiorCategory, 260.0);
 
 
 
