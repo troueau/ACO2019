@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public class PartImpl extends PropertyManagerImpl implements Part {
 
-    private PartType type;
+    protected PartType type;
     private double price;
 
 
