@@ -11,18 +11,20 @@ public class PartTypeImpl implements PartType {
     private String name;
     private Class<? extends PartImpl> classRef;
     private Category category;
+    private double price;
 
-    public PartTypeImpl(String name, Class<? extends PartImpl> classRef, Category category) {
+    public PartTypeImpl(String name, Class<? extends PartImpl> classRef, Category category, double price) {
         this.name = name;
         this.classRef = classRef;
         this.category = category;
+        this.price = price;
     }
 
     public PartImpl newInstance() {
         Constructor<? extends PartImpl> constructor;
         try {
-            constructor = classRef.getConstructor();
-            return constructor.newInstance();
+            constructor = classRef.getDeclaredConstructor(PartType.class);
+            return constructor.newInstance(this);
         } catch (Exception e) {
             Logger.getGlobal().log(Level.SEVERE, "constructor call failed", e);
             System.exit(-1);

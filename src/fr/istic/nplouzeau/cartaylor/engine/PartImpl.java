@@ -11,11 +11,9 @@ import java.util.function.Supplier;
 public class PartImpl extends PropertyManagerImpl implements Part {
 
     private PartType type;
-    private double price;
 
-    public PartImpl(PartType type, double price) {
+    public PartImpl(PartType type) {
         this.type = Objects.requireNonNull(type);
-        this.price = price;
     }
 
     @Override
@@ -83,8 +81,4 @@ public class PartImpl extends PropertyManagerImpl implements Part {
         return Collections.emptySet();
     }
 
-    @Override
-    public double getPrice() {
-        return price;
-    }
 }

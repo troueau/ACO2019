@@ -15,8 +15,12 @@ enum Color {
 public class Exterior extends PartImpl {
     private Color paintColor = Color.WHITE;
 
-    public Exterior(PartType type, double price) {
-        super(type, price);
+    public Exterior(PartType type) {
+        super(type);
+        addProperty("paintColor",
+                () -> getColor(),
+                (c) -> setColor(c),
+                possibleColors);
     }
 
     public String getColor() {
@@ -30,10 +34,5 @@ public class Exterior extends PartImpl {
 
     Set<String> possibleColors = Set.of("BLUE", "RED");
 
-    public Exterior() {
-        addProperty("paintColor",
-                () -> getColor(),
-                (c) -> setColor(c),
-                possibleColors);
-    }
+
 }

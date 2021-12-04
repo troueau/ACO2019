@@ -22,10 +22,4 @@ public interface Part extends PropertyManager {
 	 * @return type
 	 */
 	PartType getType();
-
-	/**
-	 * get the price of the Part
-	 * @return the price
-	 */
-	double getPrice();
 }
