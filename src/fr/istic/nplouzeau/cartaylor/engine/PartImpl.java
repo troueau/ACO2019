@@ -11,6 +11,8 @@ import java.util.function.Supplier;
 public class PartImpl extends PropertyManagerImpl implements Part {
 
     private PartType type;
+    private double price;
+
 
     @Override
     public Category getCategory() {
@@ -75,5 +77,10 @@ public class PartImpl extends PropertyManagerImpl implements Part {
             return Collections.unmodifiableSet(properties.get(propertyName).possibleValues);
         }
         return Collections.emptySet();
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
     }
 }

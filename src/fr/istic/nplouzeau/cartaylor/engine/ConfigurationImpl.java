@@ -19,27 +19,19 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public boolean isValid() {
-        if (!isComplete()) return false;
         // Check for all PartType if requirements and incompatibilities are respected
         for (Map.Entry<Category, Part> entry1 : mapCategoryPartType.entrySet()) {
 
             Set<PartType> incompatibilities = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getIncompatibilities(entry1.getValue().getType());
             Set<PartType> requirements = Objects.isNull(compatibilityManager) ? Collections.emptySet() : compatibilityManager.getRequirements(entry1.getValue().getType());
 
-            for (PartType requiredPartType : requirements) {
-                //Current solution, might not be good
-                Set<String> configSelectedParts = new HashSet<>();
-                for(Part p: this.getSelectedParts()) {
-                    configSelectedParts.add(p.getName());
-                }
-                if(!configSelectedParts.contains(requiredPartType.getName())) return false;
+            Set<PartType> selectedPartType = convertSetOfPartToSetOfPartType(this.getSelectedParts());
 
-                //Old code, does not work with v2
-                /*if (!this.getSelectedParts().contains(requiredPartType)) return false;*/
-            }
+            if (!selectedPartType.containsAll(requirements)) return false;
+
 
             for (Map.Entry<Category, Part> entry2 : mapCategoryPartType.entrySet()) {
-                if (incompatibilities.contains(entry2.getValue())) return false;
+                if (incompatibilities.contains(entry2.getValue().getType())) return false;
             }
         }
         return true;
@@ -78,16 +70,36 @@ public class ConfigurationImpl implements Configuration {
         mapCategoryPartType.keySet().forEach(this::unselectPartType);
     }
 
-    /**
-     * print an HTML descrption of current configuration
-     * @param ps a PrintStream
-     */
+    @Override
     public void printDescription(PrintStream ps) {
+        // TODO
         StringBuilder tmp = new StringBuilder();
-        for (Map.Entry elem : mapCategoryPartType.entrySet()) {
-            tmp.append(elem.getKey().toString());
+        mapCategoryPartType.forEach((key, value) -> {
+            tmp.append(key.toString());
             tmp.append("\n");
-            tmp.append(elem.getValue().toString());
+            tmp.append(value.toString());
+        });
+    }
+
+    @Override
+    public double getPrice() {
+        double totalPrice = 0.0;
+        if (this.isValid()) {
+            Set<Part> selectedParts = this.getSelectedParts();
+            for (Part part : selectedParts) {
+                totalPrice += part.getPrice();
+            }
         }
+        return totalPrice;
+    }
+
+
+
+    private Set<PartType> convertSetOfPartToSetOfPartType(Set<Part> l) {
+        Set<PartType> ret = new HashSet<>();
+        for (Part elem : l) {
+            ret.add(elem.getType());
+        }
+        return ret;
     }
 }
