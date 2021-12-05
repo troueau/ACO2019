@@ -8,6 +8,10 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/**
+ * Implementation of the interface Part
+ * @author Arnaud DELOURMEL, Tom ROUSSEAU
+ */
 public class PartImpl extends PropertyManagerImpl implements Part {
 
     private PartType type;

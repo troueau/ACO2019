@@ -5,6 +5,10 @@ import fr.istic.nplouzeau.cartaylor.api.*;
 import java.io.PrintStream;
 import java.util.*;
 
+/**
+ * Implementation of the interface Configuration
+ * @author Arnaud DELOURMEL, Tom ROUSSEAU
+ */
 public class ConfigurationImpl implements Configuration {
 
     //Contains user's choice

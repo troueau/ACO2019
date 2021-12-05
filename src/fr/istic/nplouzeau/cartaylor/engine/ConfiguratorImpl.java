@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Implementation of the interface Configurator
+ * @author Arnaud DELOURMEL, Tom ROUSSEAU
+ */
 public class ConfiguratorImpl implements Configurator {
 
     private CompatibilityChecker compatibilityChecker;

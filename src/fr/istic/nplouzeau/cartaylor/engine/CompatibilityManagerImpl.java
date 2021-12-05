@@ -6,6 +6,10 @@ import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
 
 import java.util.*;
 
+/**
+ * Implementation of the interface CompatibilityManager
+ * @author Arnaud DELOURMEL, Tom ROUSSEAU
+ */
 public class CompatibilityManagerImpl implements CompatibilityManager {
 
     private static final String ERR_ALREADY_IN_REQUIREMENTS = "You can't add %s in incompatibilities because it is already in requirements";

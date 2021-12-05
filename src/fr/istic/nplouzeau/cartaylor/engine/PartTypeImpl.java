@@ -7,6 +7,10 @@ import java.lang.reflect.Constructor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of the interface PartType
+ * @author Arnaud DELOURMEL, Tom ROUSSEAU
+ */
 public class PartTypeImpl implements PartType {
     private String name;
     private Class<? extends PartImpl> classRef;

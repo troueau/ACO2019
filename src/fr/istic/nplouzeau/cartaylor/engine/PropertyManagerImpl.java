@@ -5,6 +5,10 @@ import fr.istic.nplouzeau.cartaylor.api.PropertyManager;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Implementation of the interface PropertyManager
+ * @author Arnaud DELOURMEL, Tom ROUSSEAU
+ */
 public class PropertyManagerImpl implements PropertyManager {
     @Override
     public Set<String> getPropertyNames() {
