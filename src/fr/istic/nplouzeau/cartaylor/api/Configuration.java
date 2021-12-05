@@ -51,11 +51,6 @@ public interface Configuration {
      */
     void clear();
 
-    /**
-     * print an HTML descrption of current configuration
-     * @param ps a PrintStream
-     */
-    void printDescription(PrintStream ps);
 
     /**
      * method to get the price of the current configuration

@@ -76,16 +76,7 @@ public class ConfigurationImpl implements Configuration {
         mapCategoryPartType.keySet().forEach(this::unselectPartType);
     }
 
-    @Override
-    public void printDescription(PrintStream ps) {
-        // TODO
-        StringBuilder tmp = new StringBuilder();
-        mapCategoryPartType.forEach((key, value) -> {
-            tmp.append(key.toString());
-            tmp.append("\n");
-            tmp.append(value.toString());
-        });
-    }
+
 
     @Override
     public double getPrice() {
