@@ -12,21 +12,24 @@ import java.util.Set;
 public class PropertyManagerImpl implements PropertyManager {
     @Override
     public Set<String> getPropertyNames() {
+        // TODO
         return null;
     }
 
     @Override
     public Set<String> getAvailablePropertyValues(String propertyName) {
+        // TODO
         return null;
     }
 
     @Override
     public Optional<String> getProperty(String propertyName) {
+        //TODO
         return Optional.empty();
     }
 
     @Override
     public void setProperty(String propertyName, String propertyValue) {
-
+        //TODO
     }
 }
