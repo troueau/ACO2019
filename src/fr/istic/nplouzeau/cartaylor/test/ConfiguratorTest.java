@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import fr.istic.nplouzeau.cartaylor.engine.CategoryImpl;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 public class ConfiguratorTest extends CarTaylorTest {
@@ -49,6 +53,16 @@ public class ConfiguratorTest extends CarTaylorTest {
     @Test
     void testGetCompatibilityManager() {
         assertEquals(compatibilityManager, configurator.getCompatibilityChecker());
+    }
+
+    @Test
+    void testPrintDescription() throws UnsupportedEncodingException {
+
+        String expected = "";
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        configurator.printDescription(new PrintStream(os));
+
+        assertEquals(expected, os.toString(StandardCharsets.UTF_8));
     }
 
 }

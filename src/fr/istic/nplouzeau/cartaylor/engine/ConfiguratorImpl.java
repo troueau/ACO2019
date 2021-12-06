@@ -46,9 +46,7 @@ public class ConfiguratorImpl implements Configurator {
 
     @Override
     public void printDescription(PrintStream ps) {
-        // TODO
         StringBuilder ret = new StringBuilder();
-//        Map<Category, Part> configMap = configuration.getSelectionForCategory()
         ret.append("<table> <thead> <tr>");
         ret.append("<th> Category </th> <th> Part </th> <th> Variant </th> <th> Price </th> ");
         ret.append("</tr> </thead> <tbody> ");
@@ -57,11 +55,14 @@ public class ConfiguratorImpl implements Configurator {
             ret.append("<tr> <td> ");
             ret.append(cat.getName());
             ret.append(" </td> <td>");
-            tmp.ifPresent(part -> ret.append(part.getName()));
+            tmp.ifPresent(part -> ret.append(part.getType().getName()));
             ret.append(" </td> <td>");
-
+            // TODO manage variant append the color...
+            tmp.ifPresent(part -> ret.append("BLUE"));
+            ret.append(" </td> <td>");
+            tmp.ifPresent(part -> ret.append(part.getType().getPrice()));
+            ret.append(" </td>");
             ret.append("\n");
-            ret.append(value.toString());
         });
         ret.append(" </tr> </tbody> </table>");
 
