@@ -3,10 +3,7 @@ package fr.istic.nplouzeau.cartaylor.engine;
 import fr.istic.nplouzeau.cartaylor.api.*;
 
 import java.io.PrintStream;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Implementation of the interface Configurator
@@ -50,11 +47,24 @@ public class ConfiguratorImpl implements Configurator {
     @Override
     public void printDescription(PrintStream ps) {
         // TODO
-//        StringBuilder tmp = new StringBuilder();
-//        mapCategoryPartType.forEach((key, value) -> {
-//            tmp.append(key.toString());
-//            tmp.append("\n");
-//            tmp.append(value.toString());
-//        });
+        StringBuilder ret = new StringBuilder();
+//        Map<Category, Part> configMap = configuration.getSelectionForCategory()
+        ret.append("<table> <thead> <tr>");
+        ret.append("<th> Category </th> <th> Part </th> <th> Variant </th> <th> Price </th> ");
+        ret.append("</tr> </thead> <tbody> ");
+        mapCategoryPartType.forEach((cat, value) -> {
+            Optional<Part> tmp = configuration.getSelectionForCategory(cat);
+            ret.append("<tr> <td> ");
+            ret.append(cat.getName());
+            ret.append(" </td> <td>");
+            tmp.ifPresent(part -> ret.append(part.getName()));
+            ret.append(" </td> <td>");
+
+            ret.append("\n");
+            ret.append(value.toString());
+        });
+        ret.append(" </tr> </tbody> </table>");
+
+        ps.print(ret.toString());
     }
 }
