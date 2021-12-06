@@ -1,5 +1,6 @@
 package fr.istic.nplouzeau.cartaylor.api;
 
+import java.io.PrintStream;
 import java.util.Set;
 
 /**
@@ -31,5 +32,11 @@ public interface Configurator {
      * @return CompatibilityChecker
      */
     CompatibilityChecker getCompatibilityChecker();
+
+    /**
+     * print an HTML descrption of current configuration
+     * @param ps a PrintStream
+     */
+    void printDescription(PrintStream ps);
 
 }

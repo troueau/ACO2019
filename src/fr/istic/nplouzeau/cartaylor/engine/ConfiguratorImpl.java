@@ -2,6 +2,7 @@ package fr.istic.nplouzeau.cartaylor.engine;
 
 import fr.istic.nplouzeau.cartaylor.api.*;
 
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
@@ -44,5 +45,16 @@ public class ConfiguratorImpl implements Configurator {
     @Override
     public CompatibilityChecker getCompatibilityChecker() {
         return compatibilityChecker;
+    }
+
+    @Override
+    public void printDescription(PrintStream ps) {
+        // TODO
+//        StringBuilder tmp = new StringBuilder();
+//        mapCategoryPartType.forEach((key, value) -> {
+//            tmp.append(key.toString());
+//            tmp.append("\n");
+//            tmp.append(value.toString());
+//        });
     }
 }
