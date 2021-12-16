@@ -4,12 +4,22 @@ import fr.istic.nplouzeau.cartaylor.api.*;
 
 import java.util.*;
 
+
+/**
+ * Implementation of the interface Configuration
+ * @author Arnaud DELOURMEL, Tom ROUSSEAU
+ */
 public class ConfigurationImpl implements Configuration {
 
     //Contains user's choice
     private Map<Category, PartType> mapCategoryPartType;
     private CompatibilityManager compatibilityManager;
 
+    /**
+     * Constructor
+     * @param mapCategoryPartType Map
+     * @param compatibilityManager CompatibilityManager
+     */
     public ConfigurationImpl(Map<Category, PartType> mapCategoryPartType, CompatibilityManager compatibilityManager) {
         this.mapCategoryPartType = Objects.requireNonNull(mapCategoryPartType);
         this.compatibilityManager = Objects.requireNonNull(compatibilityManager);
