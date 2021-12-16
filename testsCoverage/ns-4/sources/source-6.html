@@ -1,0 +1,104 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Configurator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.istic.nplouzeau.cartaylor.api</a>
+</div>
+
+<h1>Coverage Summary for Class: Configurator (fr.istic.nplouzeau.cartaylor.api)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Configurator</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package fr.istic.nplouzeau.cartaylor.api;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.util.Set;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * a public type to get information from a chosen category
+<i class="no-highlight">7</i>&nbsp; */
+<i class="no-highlight">8</i>&nbsp;public interface Configurator {
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;    /**
+<i class="no-highlight">11</i>&nbsp;     * get the categories for the current configuration
+<i class="no-highlight">12</i>&nbsp;     * @return an unmodifiable Set of category
+<i class="no-highlight">13</i>&nbsp;     */
+<i class="no-highlight">14</i>&nbsp;    Set&lt;Category&gt; getCategories();
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;    /**
+<i class="no-highlight">17</i>&nbsp;     * get all the parts for a chosen category
+<i class="no-highlight">18</i>&nbsp;     * @param category PartType&#39;s category
+<i class="no-highlight">19</i>&nbsp;     * @return a not null and unmodifiable Set of PartType
+<i class="no-highlight">20</i>&nbsp;     */
+<i class="no-highlight">21</i>&nbsp;    Set&lt;PartType&gt; getVariants(Category category);
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    /**
+<i class="no-highlight">24</i>&nbsp;     * get the current configuration
+<i class="no-highlight">25</i>&nbsp;     * @return a configuration
+<i class="no-highlight">26</i>&nbsp;     */
+<i class="no-highlight">27</i>&nbsp;    Configuration getConfiguration();
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    /**
+<i class="no-highlight">30</i>&nbsp;     * get the compatibility for teh current configuration
+<i class="no-highlight">31</i>&nbsp;     * @return CompatibilityChecker
+<i class="no-highlight">32</i>&nbsp;     */
+<i class="no-highlight">33</i>&nbsp;    CompatibilityChecker getCompatibilityChecker();
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-16 17:07</div>
+</div>
+</body>
+</html>

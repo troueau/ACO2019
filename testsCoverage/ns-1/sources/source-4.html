@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ConfiguratorImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.istic.nplouzeau.cartaylor.engine</a>
+</div>
+
+<h1>Coverage Summary for Class: ConfiguratorImpl (fr.istic.nplouzeau.cartaylor.engine)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConfiguratorImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package fr.istic.nplouzeau.cartaylor.engine;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import fr.istic.nplouzeau.cartaylor.api.*;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import java.util.Collections;
+<i class="no-highlight">6</i>&nbsp;import java.util.Map;
+<i class="no-highlight">7</i>&nbsp;import java.util.Objects;
+<i class="no-highlight">8</i>&nbsp;import java.util.Set;
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;/**
+<i class="no-highlight">11</i>&nbsp; * Implementation of the interface Configurator
+<i class="no-highlight">12</i>&nbsp; * @author Arnaud DELOURMEL, Tom ROUSSEAU
+<i class="no-highlight">13</i>&nbsp; */
+<i class="no-highlight">14</i>&nbsp;public class ConfiguratorImpl implements Configurator {
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;    private CompatibilityChecker compatibilityChecker;
+<i class="no-highlight">17</i>&nbsp;    // Contains all the partType for specific Category
+<i class="no-highlight">18</i>&nbsp;    private Map&lt;Category, Set&lt;PartType&gt;&gt; mapCategoryPartType;
+<i class="no-highlight">19</i>&nbsp;    private Configuration configuration;
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;    /**
+<i class="no-highlight">22</i>&nbsp;     * Constructor
+<i class="no-highlight">23</i>&nbsp;     * @param compatibilityChecker The compatibility checker
+<i class="no-highlight">24</i>&nbsp;     * @param mapCategoryPartType The map Category PartType
+<i class="no-highlight">25</i>&nbsp;     * @param configuration The configuration
+<i class="no-highlight">26</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    public ConfiguratorImpl(CompatibilityChecker compatibilityChecker, Map&lt;Category, Set&lt;PartType&gt;&gt; mapCategoryPartType, Configuration configuration) {</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        this.compatibilityChecker = Objects.requireNonNull(compatibilityChecker);</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        this.mapCategoryPartType = Objects.requireNonNull(mapCategoryPartType);</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        this.configuration = Objects.requireNonNull(configuration);</b>
+<i class="no-highlight">31</i>&nbsp;    }
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;    @Override
+<i class="no-highlight">35</i>&nbsp;    public Set&lt;Category&gt; getCategories() {
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        return Collections.unmodifiableSet(mapCategoryPartType.keySet());</b>
+<i class="no-highlight">37</i>&nbsp;    }
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;    @Override
+<i class="no-highlight">40</i>&nbsp;    public Set&lt;PartType&gt; getVariants(Category category) {
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        Set&lt;PartType&gt; res = Objects.requireNonNullElse(mapCategoryPartType.get(category),Collections.emptySet());</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        return Collections.unmodifiableSet(res);</b>
+<i class="no-highlight">43</i>&nbsp;    }
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    @Override
+<i class="no-highlight">46</i>&nbsp;    public Configuration getConfiguration() {
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        return configuration;</b>
+<i class="no-highlight">48</i>&nbsp;    }
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;    @Override
+<i class="no-highlight">51</i>&nbsp;    public CompatibilityChecker getCompatibilityChecker() {
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        return compatibilityChecker;</b>
+<i class="no-highlight">53</i>&nbsp;    }
+<i class="no-highlight">54</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-16 17:07</div>
+</div>
+</body>
+</html>

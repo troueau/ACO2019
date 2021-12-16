@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CompatibilityCheckerTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.istic.nplouzeau.cartaylor.test</a>
+</div>
+
+<h1>Coverage Summary for Class: CompatibilityCheckerTest (fr.istic.nplouzeau.cartaylor.test)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CompatibilityCheckerTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package fr.istic.nplouzeau.cartaylor.test;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import org.junit.jupiter.api.Test;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import static org.junit.jupiter.api.Assertions.assertEquals;
+<i class="no-highlight">6</i>&nbsp;
+<b class="fc"><i class="no-highlight">7</i>&nbsp;public class CompatibilityCheckerTest extends CarTaylorTest {</b>
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;    /*
+<i class="no-highlight">10</i>&nbsp;     * test du getter d&#39;incompatibilitées en passant une reference null en parametre
+<i class="no-highlight">11</i>&nbsp;     */
+<i class="no-highlight">12</i>&nbsp;    @Test
+<i class="no-highlight">13</i>&nbsp;    void testGetIncompatibilitiesWithNotExistReference() {
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        assertEquals(0, compatibilityManager.getIncompatibilities(null).size());</b>
+<i class="no-highlight">15</i>&nbsp;    }
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;    /*
+<i class="no-highlight">18</i>&nbsp;     * test du getter d&#39;incompatibilitées avec comme reference une PartType n&#39;ayant aucune incompatibilitées
+<i class="no-highlight">19</i>&nbsp;     */
+<i class="no-highlight">20</i>&nbsp;    @Test
+<i class="no-highlight">21</i>&nbsp;    void testGetIncompatibilitiesReturnEmptyList() {
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        assertEquals(0, compatibilityManager.getIncompatibilities(eg100).size());</b>
+<i class="no-highlight">23</i>&nbsp;    }
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    /*
+<i class="no-highlight">26</i>&nbsp;     * test du getter d&#39;incompatibilitées avec comme reference une PartType ayant 3 incompatibilitées (eg100, eg133, ed110)
+<i class="no-highlight">27</i>&nbsp;     */
+<i class="no-highlight">28</i>&nbsp;    @Test
+<i class="no-highlight">29</i>&nbsp;    void testGetIncompatibilities() {
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        assertEquals(incompatibilitiesTSF7, compatibilityManager.getIncompatibilities(tsf7));</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        assertEquals(3, compatibilityManager.getIncompatibilities(tsf7).size());</b>
+<i class="no-highlight">32</i>&nbsp;    }
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;    /*
+<i class="no-highlight">35</i>&nbsp;     * test du getter requirements en passant une reference null en paramètre
+<i class="no-highlight">36</i>&nbsp;     */
+<i class="no-highlight">37</i>&nbsp;    @Test
+<i class="no-highlight">38</i>&nbsp;    void testGetRequirementsWithNotExistReference() {
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        assertEquals(0, compatibilityManager.getRequirements(null).size());</b>
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;    /*
+<i class="no-highlight">43</i>&nbsp;     * test du getter requirements avec comme reference une PartType n&#39;ayant aucun requirements
+<i class="no-highlight">44</i>&nbsp;     */
+<i class="no-highlight">45</i>&nbsp;    @Test
+<i class="no-highlight">46</i>&nbsp;    void testGetRequirementsReturnEmptyList() {
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        assertEquals(0, compatibilityManager.getRequirements(eg100).size());</b>
+<i class="no-highlight">48</i>&nbsp;    }
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;    /*
+<i class="no-highlight">51</i>&nbsp;     * test du getter requirements avec comme reference une PartType ayant 1 requirements (eh120)
+<i class="no-highlight">52</i>&nbsp;     */
+<i class="no-highlight">53</i>&nbsp;    @Test
+<i class="no-highlight">54</i>&nbsp;    void testGetRequirements() {
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        assertEquals(requirementsTC120, compatibilityManager.getRequirements(tc120));</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        assertEquals(1, compatibilityManager.getRequirements(tc120).size());</b>
+<i class="no-highlight">57</i>&nbsp;    }
+<i class="no-highlight">58</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-16 17:07</div>
+</div>
+</body>
+</html>

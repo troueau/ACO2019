@@ -1,0 +1,196 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CompatibilityManagerImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.istic.nplouzeau.cartaylor.engine</a>
+</div>
+
+<h1>Coverage Summary for Class: CompatibilityManagerImpl (fr.istic.nplouzeau.cartaylor.engine)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CompatibilityManagerImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (29/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package fr.istic.nplouzeau.cartaylor.engine;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import fr.istic.nplouzeau.cartaylor.api.CompatibilityManager;
+<i class="no-highlight">4</i>&nbsp;import fr.istic.nplouzeau.cartaylor.api.PartType;
+<i class="no-highlight">5</i>&nbsp;import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import java.util.*;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;/**
+<i class="no-highlight">10</i>&nbsp; * Implementation of the interface CompatibilityManager
+<i class="no-highlight">11</i>&nbsp; * @author Arnaud DELOURMEL, Tom ROUSSEAU
+<i class="no-highlight">12</i>&nbsp; */
+<i class="no-highlight">13</i>&nbsp;public class CompatibilityManagerImpl implements CompatibilityManager {
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    private static final String ERR_ALREADY_IN_REQUIREMENTS = &quot;You can&#39;t add %s in incompatibilities because it is already in requirements&quot;;
+<i class="no-highlight">16</i>&nbsp;    private static final String ERR_ALREADY_IN_INCOMPATIBILITIES = &quot;You can&#39;t add %s in requirements because it is already in incompatibilities&quot;;
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    //A set of parts required for the key part
+<i class="no-highlight">19</i>&nbsp;    private Map&lt;PartType, Set&lt;PartType&gt;&gt;  requirements;
+<i class="no-highlight">20</i>&nbsp;    //A set of parts incompatible with the key part
+<i class="no-highlight">21</i>&nbsp;    private Map&lt;PartType, Set&lt;PartType&gt;&gt; incompatibilities;
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    /**
+<i class="no-highlight">24</i>&nbsp;     * Construct CompatibilityManagerImpl
+<i class="no-highlight">25</i>&nbsp;     * @param requirements The map of requirements can be empty or null
+<i class="no-highlight">26</i>&nbsp;     * @param incompatibilities The map of the incompatibilities can be empty or null
+<i class="no-highlight">27</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    public CompatibilityManagerImpl(Map&lt;PartType, Set&lt;PartType&gt;&gt; requirements, Map&lt;PartType, Set&lt;PartType&gt;&gt; incompatibilities) {</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        this.requirements = Objects.requireNonNullElse(requirements, new HashMap&lt;&gt;());</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        this.incompatibilities = Objects.requireNonNullElse(incompatibilities, new HashMap&lt;&gt;());</b>
+<i class="no-highlight">31</i>&nbsp;    }
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    @Override
+<i class="no-highlight">34</i>&nbsp;    public Set&lt;PartType&gt; getIncompatibilities(PartType reference) {
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        Set&lt;PartType&gt; ret = Objects.requireNonNullElse(incompatibilities.get(reference), Collections.emptySet());</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        return Collections.unmodifiableSet(ret);</b>
+<i class="no-highlight">37</i>&nbsp;     }
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;    @Override
+<i class="no-highlight">40</i>&nbsp;    public Set&lt;PartType&gt; getRequirements(PartType reference) {
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        Set&lt;PartType&gt; ret = Objects.requireNonNullElse(requirements.get(reference), Collections.emptySet());</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        return Collections.unmodifiableSet(ret);</b>
+<i class="no-highlight">43</i>&nbsp;    }
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    @Override
+<i class="no-highlight">46</i>&nbsp;    public void addIncompatibilities(PartType reference, Set&lt;PartType&gt; target) throws AlreadyManageException {
+<i class="no-highlight">47</i>&nbsp;        // Check if one of the new Incompatibility is not in the Requirements list
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        Set&lt;PartType&gt; requirementsForReference = getRequirements(reference);</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        for (PartType elemToAdd : target) {</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            if (requirementsForReference.contains(elemToAdd)) {</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                throw new AlreadyManageException(String.format(ERR_ALREADY_IN_REQUIREMENTS, elemToAdd.toString()));</b>
+<i class="no-highlight">52</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        }</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        Set&lt;PartType&gt; actualPartTypeSet = Objects.requireNonNullElse(incompatibilities.get(reference), new HashSet&lt;&gt;());</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        actualPartTypeSet.addAll(target);</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        incompatibilities.put(reference, actualPartTypeSet);</b>
+<i class="no-highlight">58</i>&nbsp;    }
+<i class="no-highlight">59</i>&nbsp;
+<i class="no-highlight">60</i>&nbsp;    @Override
+<i class="no-highlight">61</i>&nbsp;    public void removeIncompatibility(PartType reference, PartType target) {
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        if (reference != null) {</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            Set&lt;PartType&gt; tmp = Objects.requireNonNullElse(incompatibilities.get(reference), new HashSet&lt;&gt;());</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            tmp.remove(target);</b>
+<i class="no-highlight">65</i>&nbsp;        }
+<i class="no-highlight">66</i>&nbsp;    }
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;    @Override
+<i class="no-highlight">69</i>&nbsp;    public void addRequirements(PartType reference, Set&lt;PartType&gt; target) throws AlreadyManageException {
+<i class="no-highlight">70</i>&nbsp;        // Check if one of the new Requirements is not in the Incompatibilites list
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        Set&lt;PartType&gt; incompatibilitiesForReference = getIncompatibilities(reference);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        for (PartType elemToAdd : target) {</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;            if (incompatibilitiesForReference.contains(elemToAdd)) {</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;                throw new AlreadyManageException(String.format(ERR_ALREADY_IN_INCOMPATIBILITIES, elemToAdd.toString()));</b>
+<i class="no-highlight">75</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        }</b>
+<i class="no-highlight">77</i>&nbsp;
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        Set&lt;PartType&gt; actualPartTypeSet = Objects.requireNonNullElse(requirements.get(reference), new HashSet&lt;&gt;());</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;        actualPartTypeSet.addAll(target);</b>
+<i class="no-highlight">80</i>&nbsp;
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        requirements.put(reference, actualPartTypeSet);</b>
+<i class="no-highlight">82</i>&nbsp;    }
+<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">84</i>&nbsp;    @Override
+<i class="no-highlight">85</i>&nbsp;    public void removeRequirement(PartType reference, PartType target) {
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        if (reference != null) {</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;            Set&lt;PartType&gt; tmp = Objects.requireNonNullElse(requirements.get(reference), new HashSet&lt;&gt;());</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;            tmp.remove(target);</b>
+<i class="no-highlight">89</i>&nbsp;        }
+<i class="no-highlight">90</i>&nbsp;    }
+<i class="no-highlight">91</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-16 17:07</div>
+</div>
+</body>
+</html>
