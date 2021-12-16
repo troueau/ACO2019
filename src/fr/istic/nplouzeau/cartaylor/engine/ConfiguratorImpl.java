@@ -1,6 +1,7 @@
 package fr.istic.nplouzeau.cartaylor.engine;
 
 import fr.istic.nplouzeau.cartaylor.api.*;
+import fr.istic.nplouzeau.cartaylor.engine.car.Exterior;
 
 import java.io.PrintStream;
 import java.util.*;
@@ -47,7 +48,7 @@ public class ConfiguratorImpl implements Configurator {
     @Override
     public void printDescription(PrintStream ps) {
         StringBuilder ret = new StringBuilder();
-        ret.append("<table> <thead> <tr>");
+        ret.append("<table border=\"2\"> <thead> <tr>");
         ret.append("<th> Category </th> <th> Part </th> <th> Variant </th> <th> Price </th> ");
         ret.append("</tr> </thead> <tbody> ");
         mapCategoryPartType.forEach((cat, value) -> {
@@ -57,8 +58,13 @@ public class ConfiguratorImpl implements Configurator {
             ret.append(" </td> <td>");
             tmp.ifPresent(part -> ret.append(part.getType().getName()));
             ret.append(" </td> <td>");
-            // TODO manage variant append the color...
-            tmp.ifPresent(part -> ret.append("BLUE"));
+
+            tmp.ifPresent(part -> {
+                if (part instanceof Exterior) {
+                    ret.append(((Exterior) part).getColor());
+                }
+            });
+
             ret.append(" </td> <td>");
             tmp.ifPresent(part -> ret.append(part.getType().getPrice()));
             ret.append(" </td>");

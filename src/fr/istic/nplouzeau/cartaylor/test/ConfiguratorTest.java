@@ -58,8 +58,16 @@ public class ConfiguratorTest extends CarTaylorTest {
     @Test
     void testPrintDescription() throws UnsupportedEncodingException {
 
-        String expected = "";
+        String expected = "<table border=\"2\"> <thead> <tr><th> Category </th> <th> Part </th> <th> Variant </th> <th> Price </th> </tr> </thead> <tbody> <tr> <td> Engine </td> <td>EG100 </td> <td> </td> <td>500.0 </td>\n" +
+                "<tr> <td> Exterior </td> <td>XS </td> <td>WHITE </td> <td>900.0 </td>\n" +
+                "<tr> <td> Transmission </td> <td>TM5 </td> <td> </td> <td>650.0 </td>\n" +
+                "<tr> <td> Interior </td> <td>IH </td> <td> </td> <td>260.0 </td>\n" +
+                " </tr> </tbody> </table>";
         ByteArrayOutputStream os = new ByteArrayOutputStream();
+        configuration.selectPart(xs);
+        configuration.selectPart(ih);
+        configuration.selectPart(eg100);
+
         configurator.printDescription(new PrintStream(os));
 
         assertEquals(expected, os.toString(StandardCharsets.UTF_8));
