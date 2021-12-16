@@ -90,6 +90,11 @@ public class ConfigurationImpl implements Configuration {
         return totalPrice;
     }
 
+    /**
+     * Utils method to convert a set of Part into a set of PartType
+     * @param l a set of Part
+     * @return a set of PartType
+     */
     private Set<PartType> convertSetOfPartToSetOfPartType(Set<Part> l) {
         Set<PartType> ret = new HashSet<>();
         for (Part elem : l) {
