@@ -27,6 +27,8 @@ public class PartTest extends CarTaylorTest {
 
     @Test
     void testGetName() {
-        assertEquals("TM5", tm5.getName());
+
+        Part tm5Part = ((PartTypeImpl) tm5).newInstance();
+        assertEquals("fr.istic.nplouzeau.cartaylor.engine.car.Transmission", tm5Part.getName());
     }
 }

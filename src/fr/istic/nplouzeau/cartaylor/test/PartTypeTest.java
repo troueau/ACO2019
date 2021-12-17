@@ -1,6 +1,10 @@
 package fr.istic.nplouzeau.cartaylor.test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import fr.istic.nplouzeau.cartaylor.engine.PartTypeImpl;
+import fr.istic.nplouzeau.cartaylor.engine.car.Interior;
+import fr.istic.nplouzeau.cartaylor.engine.car.Transmission;
 import org.junit.jupiter.api.Test;
 
 public class PartTypeTest extends CarTaylorTest {
@@ -28,5 +32,4 @@ public class PartTypeTest extends CarTaylorTest {
     public void testGetPrice() {
         assertEquals(500.0, eg100.getPrice(), epsilon);
     }
-
 }
