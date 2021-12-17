@@ -1,0 +1,110 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CompatibilityManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.istic.nplouzeau.cartaylor.api</a>
+</div>
+
+<h1>Coverage Summary for Class: CompatibilityManager (fr.istic.nplouzeau.cartaylor.api)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">CompatibilityManager</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package fr.istic.nplouzeau.cartaylor.api;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import fr.istic.nplouzeau.cartaylor.exception.AlreadyManageException;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import java.util.Set;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;/**
+<i class="no-highlight">8</i>&nbsp; * A public type to manage compatibilities and incompatibilities
+<i class="no-highlight">9</i>&nbsp; */
+<i class="no-highlight">10</i>&nbsp;public interface CompatibilityManager extends CompatibilityChecker {
+<i class="no-highlight">11</i>&nbsp;    /**
+<i class="no-highlight">12</i>&nbsp;     * Allow to add new incompatibilities for a PartType
+<i class="no-highlight">13</i>&nbsp;     * @param reference The reference of the PartType to modified
+<i class="no-highlight">14</i>&nbsp;     * @param target Collection of the new incompatibilities. The elements can&#39;t be in the requirements.
+<i class="no-highlight">15</i>&nbsp;     * @throws AlreadyManageException If one of the element to add is already in the requirements
+<i class="no-highlight">16</i>&nbsp;     */
+<i class="no-highlight">17</i>&nbsp;    void addIncompatibilities(PartType reference, Set&lt;PartType&gt; target) throws AlreadyManageException;
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;    /**
+<i class="no-highlight">20</i>&nbsp;     * Allow to remove one incompatibilie of one PartType
+<i class="no-highlight">21</i>&nbsp;     * @param reference reference of a part type
+<i class="no-highlight">22</i>&nbsp;     * @param target The incompatibilitie to remove
+<i class="no-highlight">23</i>&nbsp;     */
+<i class="no-highlight">24</i>&nbsp;    void removeIncompatibility(PartType reference, PartType target);
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    /**
+<i class="no-highlight">27</i>&nbsp;     * Allow to add new requirements of one PartType
+<i class="no-highlight">28</i>&nbsp;     * @param reference reference of a part type
+<i class="no-highlight">29</i>&nbsp;     * @param target The new requirements to add. The elements can&#39;t be in the incompatibilities.
+<i class="no-highlight">30</i>&nbsp;     * @throws AlreadyManageException If one of the element to add is already in the incompatibilities
+<i class="no-highlight">31</i>&nbsp;     */
+<i class="no-highlight">32</i>&nbsp;    void addRequirements(PartType reference, Set&lt;PartType&gt; target) throws AlreadyManageException;
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;    /**
+<i class="no-highlight">35</i>&nbsp;     * Allow to remove one requirement of one PartType
+<i class="no-highlight">36</i>&nbsp;     * @param reference reference of a part type
+<i class="no-highlight">37</i>&nbsp;     * @param target The requirement to remove
+<i class="no-highlight">38</i>&nbsp;     */
+<i class="no-highlight">39</i>&nbsp;    void removeRequirement(PartType reference, PartType target);
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-17 11:06</div>
+</div>
+</body>
+</html>

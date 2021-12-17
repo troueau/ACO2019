@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ConfiguratorTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.istic.nplouzeau.cartaylor.test</a>
+</div>
+
+<h1>Coverage Summary for Class: ConfiguratorTest (fr.istic.nplouzeau.cartaylor.test)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConfiguratorTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package fr.istic.nplouzeau.cartaylor.test;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import fr.istic.nplouzeau.cartaylor.api.Category;
+<i class="no-highlight">4</i>&nbsp;import static org.junit.jupiter.api.Assertions.*;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;import fr.istic.nplouzeau.cartaylor.engine.CategoryImpl;
+<i class="no-highlight">7</i>&nbsp;import org.junit.jupiter.api.Test;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;import java.io.ByteArrayOutputStream;
+<i class="no-highlight">10</i>&nbsp;import java.io.PrintStream;
+<i class="no-highlight">11</i>&nbsp;import java.io.UnsupportedEncodingException;
+<i class="no-highlight">12</i>&nbsp;import java.nio.charset.StandardCharsets;
+<i class="no-highlight">13</i>&nbsp;import java.util.Collections;
+<i class="no-highlight">14</i>&nbsp;
+<b class="fc"><i class="no-highlight">15</i>&nbsp;public class ConfiguratorTest extends CarTaylorTest {</b>
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;    /*
+<i class="no-highlight">18</i>&nbsp;     * test du Getter getCategories
+<i class="no-highlight">19</i>&nbsp;     */
+<i class="no-highlight">20</i>&nbsp;    @Test
+<i class="no-highlight">21</i>&nbsp;    void testGetCategories() {
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        assertEquals(mapCategoryPartTypeConfigurator.keySet(), configurator.getCategories());</b>
+<i class="no-highlight">23</i>&nbsp;    }
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    /*
+<i class="no-highlight">26</i>&nbsp;     * test du Getter des variants où la categorie existe dans la map
+<i class="no-highlight">27</i>&nbsp;     */
+<i class="no-highlight">28</i>&nbsp;    @Test
+<i class="no-highlight">29</i>&nbsp;    void testGetVariantsExistingCategory() {
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        assertEquals(mapCategoryPartTypeConfigurator.get(engineCategory), configurator.getVariants(engineCategory));</b>
+<i class="no-highlight">31</i>&nbsp;    }
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    /*
+<i class="no-highlight">34</i>&nbsp;     * test du Getter des variants où la categorie n&#39;existe pas dans la map -&gt; le getter retourne donc un emptySet
+<i class="no-highlight">35</i>&nbsp;     */
+<i class="no-highlight">36</i>&nbsp;    @Test
+<i class="no-highlight">37</i>&nbsp;    void testGetVariantsCategoryDoesNotExist() {
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        Category mockCategory = new CategoryImpl(&quot;MockCategory&quot;);</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        assertEquals(Collections.emptySet(), configurator.getVariants(mockCategory));</b>
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;    /*
+<i class="no-highlight">43</i>&nbsp;     * test du getter renvoyant la configuration contenue dans la class configurator
+<i class="no-highlight">44</i>&nbsp;     */
+<i class="no-highlight">45</i>&nbsp;    @Test
+<i class="no-highlight">46</i>&nbsp;    void testGetConfiguration() {
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        assertEquals(configuration, configurator.getConfiguration());</b>
+<i class="no-highlight">48</i>&nbsp;    }
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;    /*
+<i class="no-highlight">51</i>&nbsp;     * test du getter renvoyant le compatibilityManager contenu dans la class configurator
+<i class="no-highlight">52</i>&nbsp;     */
+<i class="no-highlight">53</i>&nbsp;    @Test
+<i class="no-highlight">54</i>&nbsp;    void testGetCompatibilityManager() {
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        assertEquals(compatibilityManager, configurator.getCompatibilityChecker());</b>
+<i class="no-highlight">56</i>&nbsp;    }
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;    @Test
+<i class="no-highlight">59</i>&nbsp;    void testPrintDescriptionWhenComplete() throws UnsupportedEncodingException {
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        String expected = &quot;&lt;table border=\&quot;2\&quot;&gt; &lt;thead&gt; &lt;tr&gt;&lt;th&gt; Category &lt;/th&gt; &lt;th&gt; Part &lt;/th&gt; &lt;th&gt; Variant &lt;/th&gt; &lt;th&gt; Price &lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt; &lt;td&gt; Engine &lt;/td&gt; &lt;td&gt;EG100 &lt;/td&gt; &lt;td&gt; &lt;/td&gt; &lt;td&gt;500.0 &lt;/td&gt;\n&quot; +</b>
+<i class="no-highlight">61</i>&nbsp;                &quot;&lt;tr&gt; &lt;td&gt; Exterior &lt;/td&gt; &lt;td&gt;XS &lt;/td&gt; &lt;td&gt;WHITE &lt;/td&gt; &lt;td&gt;900.0 &lt;/td&gt;\n&quot; +
+<i class="no-highlight">62</i>&nbsp;                &quot;&lt;tr&gt; &lt;td&gt; Interior &lt;/td&gt; &lt;td&gt;IH &lt;/td&gt; &lt;td&gt; &lt;/td&gt; &lt;td&gt;260.0 &lt;/td&gt;\n&quot; +
+<i class="no-highlight">63</i>&nbsp;                &quot;&lt;tr&gt; &lt;td&gt; Transmission &lt;/td&gt; &lt;td&gt;TM5 &lt;/td&gt; &lt;td&gt; &lt;/td&gt; &lt;td&gt;650.0 &lt;/td&gt;\n&quot; +
+<i class="no-highlight">64</i>&nbsp;                &quot; &lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;&quot;;
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        ByteArrayOutputStream os = new ByteArrayOutputStream();</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        configuration.selectPart(xs);</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        configuration.selectPart(ih);</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        configuration.selectPart(eg100);</b>
+<i class="no-highlight">69</i>&nbsp;
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        configurator.printDescription(new PrintStream(os));</b>
+<i class="no-highlight">71</i>&nbsp;
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        assertEquals(expected, os.toString(StandardCharsets.UTF_8));</b>
+<i class="no-highlight">73</i>&nbsp;    }
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;    @Test
+<i class="no-highlight">76</i>&nbsp;    void testPrintDescriptionWhenNotComplete() throws UnsupportedEncodingException {
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        String expected = &quot;&quot;;</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        ByteArrayOutputStream os = new ByteArrayOutputStream();</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;        configuration.selectPart(xs);</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        configuration.selectPart(eg100);</b>
+<i class="no-highlight">81</i>&nbsp;
+<b class="fc"><i class="no-highlight">82</i>&nbsp;        configurator.printDescription(new PrintStream(os));</b>
+<i class="no-highlight">83</i>&nbsp;
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        assertEquals(expected, os.toString(StandardCharsets.UTF_8));</b>
+<i class="no-highlight">85</i>&nbsp;    }
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;
+<i class="no-highlight">88</i>&nbsp;    @Test
+<i class="no-highlight">89</i>&nbsp;    void testPrintDescriptionWhenNotValid() throws UnsupportedEncodingException {
+<b class="fc"><i class="no-highlight">90</i>&nbsp;        String expected = &quot;&quot;;</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;        ByteArrayOutputStream os = new ByteArrayOutputStream();</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        configuration.selectPart(tsf7);</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;        configuration.selectPart(eg100);</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        configuration.selectPart(xs);</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;        configuration.selectPart(ih);</b>
+<i class="no-highlight">96</i>&nbsp;
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        configurator.printDescription(new PrintStream(os));</b>
+<i class="no-highlight">98</i>&nbsp;
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        assertEquals(expected, os.toString(StandardCharsets.UTF_8));</b>
+<i class="no-highlight">100</i>&nbsp;    }
+<i class="no-highlight">101</i>&nbsp;
+<i class="no-highlight">102</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-17 11:06</div>
+</div>
+</body>
+</html>
