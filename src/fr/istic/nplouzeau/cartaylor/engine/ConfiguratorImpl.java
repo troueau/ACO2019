@@ -47,19 +47,21 @@ public class ConfiguratorImpl implements Configurator {
 
     @Override
     public void printDescription(PrintStream ps) {
+        Objects.requireNonNull(ps);
         if (configuration.isValid() && configuration.isComplete()) {
             StringBuilder ret = new StringBuilder();
             ret.append("<table border=\"2\"> <thead> <tr>");
             ret.append("<th> Category </th> <th> Part </th> <th> Variant </th> <th> Price </th> ");
             ret.append("</tr> </thead> <tbody> ");
-            mapCategoryPartType.forEach((cat, value) -> {
+            List<Category> oderedCategoryList = getOrderedCategoryList();
+
+            for (Category cat : oderedCategoryList) {
                 Optional<Part> tmp = configuration.getSelectionForCategory(cat);
                 ret.append("<tr> <td> ");
                 ret.append(cat.getName());
                 ret.append(" </td> <td>");
                 tmp.ifPresent(part -> ret.append(part.getType().getName()));
                 ret.append(" </td> <td>");
-
                 tmp.ifPresent(part -> {
                     if (part instanceof Exterior) {
                         ret.append(((Exterior) part).getColor());
@@ -70,10 +72,18 @@ public class ConfiguratorImpl implements Configurator {
                 tmp.ifPresent(part -> ret.append(part.getType().getPrice()));
                 ret.append(" </td>");
                 ret.append("\n");
-            });
+            }
             ret.append(" </tr> </tbody> </table>");
             ps.print(ret.toString());
         }
 
+    }
+
+
+    private List<Category> getOrderedCategoryList() {
+        List<Category> categoryList = new ArrayList<Category>(mapCategoryPartType.keySet());
+        categoryList.sort(Comparator.comparing(Category::getName));
+
+        return categoryList;
     }
 }
