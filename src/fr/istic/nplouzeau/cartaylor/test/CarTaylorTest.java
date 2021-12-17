@@ -10,7 +10,6 @@ public class CarTaylorTest {
 
     Configurator configurator;
     Configuration configuration;
-    CompatibilityChecker compatibilityChecker;
     CompatibilityManager compatibilityManager;
 
     Map<Category, Set<PartType>> mapCategoryPartTypeConfigurator;
