@@ -196,4 +196,20 @@ public class ConfigurationTest extends CarTaylorTest {
         configuration.clear();
         assertEquals(Set.of(), configuration.getSelectedParts());
     }
+
+    @Test
+    void testGetPriceWhenConfigIsValid() {
+        configuration.selectPart(ih);
+        configuration.selectPart(eg100);
+        assertEquals(1410.0, configuration.getPrice(), epsilon);
+    }
+
+    @Test
+    void testGetPriceWhenConfigIsNotValid() {
+        configuration.selectPart(tsf7);
+        configuration.selectPart(eg100);
+        configuration.selectPart(xs);
+        configuration.selectPart(ih);
+        assertEquals(0, configuration.getPrice(), epsilon);
+    }
 }
