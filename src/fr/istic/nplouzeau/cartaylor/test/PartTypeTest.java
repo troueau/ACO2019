@@ -26,7 +26,7 @@ public class PartTypeTest extends CarTaylorTest {
      */
     @Test
     public void testGetPrice() {
-        assertEquals(500.0, eg100.getPrice(), espilon);
+        assertEquals(500.0, eg100.getPrice(), epsilon);
     }
 
 }
