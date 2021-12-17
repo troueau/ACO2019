@@ -47,31 +47,33 @@ public class ConfiguratorImpl implements Configurator {
 
     @Override
     public void printDescription(PrintStream ps) {
-        StringBuilder ret = new StringBuilder();
-        ret.append("<table border=\"2\"> <thead> <tr>");
-        ret.append("<th> Category </th> <th> Part </th> <th> Variant </th> <th> Price </th> ");
-        ret.append("</tr> </thead> <tbody> ");
-        mapCategoryPartType.forEach((cat, value) -> {
-            Optional<Part> tmp = configuration.getSelectionForCategory(cat);
-            ret.append("<tr> <td> ");
-            ret.append(cat.getName());
-            ret.append(" </td> <td>");
-            tmp.ifPresent(part -> ret.append(part.getType().getName()));
-            ret.append(" </td> <td>");
+        if (configuration.isValid() && configuration.isComplete()) {
+            StringBuilder ret = new StringBuilder();
+            ret.append("<table border=\"2\"> <thead> <tr>");
+            ret.append("<th> Category </th> <th> Part </th> <th> Variant </th> <th> Price </th> ");
+            ret.append("</tr> </thead> <tbody> ");
+            mapCategoryPartType.forEach((cat, value) -> {
+                Optional<Part> tmp = configuration.getSelectionForCategory(cat);
+                ret.append("<tr> <td> ");
+                ret.append(cat.getName());
+                ret.append(" </td> <td>");
+                tmp.ifPresent(part -> ret.append(part.getType().getName()));
+                ret.append(" </td> <td>");
 
-            tmp.ifPresent(part -> {
-                if (part instanceof Exterior) {
-                    ret.append(((Exterior) part).getColor());
-                }
+                tmp.ifPresent(part -> {
+                    if (part instanceof Exterior) {
+                        ret.append(((Exterior) part).getColor());
+                    }
+                });
+
+                ret.append(" </td> <td>");
+                tmp.ifPresent(part -> ret.append(part.getType().getPrice()));
+                ret.append(" </td>");
+                ret.append("\n");
             });
+            ret.append(" </tr> </tbody> </table>");
+            ps.print(ret.toString());
+        }
 
-            ret.append(" </td> <td>");
-            tmp.ifPresent(part -> ret.append(part.getType().getPrice()));
-            ret.append(" </td>");
-            ret.append("\n");
-        });
-        ret.append(" </tr> </tbody> </table>");
-
-        ps.print(ret.toString());
     }
 }

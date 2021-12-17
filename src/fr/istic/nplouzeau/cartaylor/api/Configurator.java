@@ -34,7 +34,7 @@ public interface Configurator {
     CompatibilityChecker getCompatibilityChecker();
 
     /**
-     * print an HTML descrption of current configuration
+     * print an HTML descrption of current configuration. The current configuration must be complete and valid.
      * @param ps a PrintStream
      */
     void printDescription(PrintStream ps);
