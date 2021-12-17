@@ -56,8 +56,7 @@ public class ConfiguratorTest extends CarTaylorTest {
     }
 
     @Test
-    void testPrintDescription() throws UnsupportedEncodingException {
-
+    void testPrintDescriptionWhenComplete() throws UnsupportedEncodingException {
         String expected = "<table border=\"2\"> <thead> <tr><th> Category </th> <th> Part </th> <th> Variant </th> <th> Price </th> </tr> </thead> <tbody> <tr> <td> Engine </td> <td>EG100 </td> <td> </td> <td>500.0 </td>\n" +
                 "<tr> <td> Exterior </td> <td>XS </td> <td>WHITE </td> <td>900.0 </td>\n" +
                 "<tr> <td> Transmission </td> <td>TM5 </td> <td> </td> <td>650.0 </td>\n" +
@@ -67,6 +66,33 @@ public class ConfiguratorTest extends CarTaylorTest {
         configuration.selectPart(xs);
         configuration.selectPart(ih);
         configuration.selectPart(eg100);
+
+        configurator.printDescription(new PrintStream(os));
+
+        assertEquals(expected, os.toString(StandardCharsets.UTF_8));
+    }
+
+    @Test
+    void testPrintDescriptionWhenNotComplete() throws UnsupportedEncodingException {
+        String expected = "";
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        configuration.selectPart(xs);
+        configuration.selectPart(eg100);
+
+        configurator.printDescription(new PrintStream(os));
+
+        assertEquals(expected, os.toString(StandardCharsets.UTF_8));
+    }
+
+
+    @Test
+    void testPrintDescriptionWhenNotValid() throws UnsupportedEncodingException {
+        String expected = "";
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        configuration.selectPart(tsf7);
+        configuration.selectPart(eg100);
+        configuration.selectPart(xs);
+        configuration.selectPart(ih);
 
         configurator.printDescription(new PrintStream(os));
 
